@@ -8,7 +8,7 @@
 //  </auto-generated>
 // ------------------------------------------------------------------------------
 
-namespace FUS
+namespace DesktopApp
 {
     using System;
     using System.CodeDom.Compiler;

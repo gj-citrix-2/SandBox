@@ -11,26 +11,29 @@ using Keyboard = Microsoft.VisualStudio.TestTools.UITesting.Keyboard;
 using GeneralUtilities;
 using System.Threading;
 
-namespace FUS
+namespace DesktopApp
 {
     /// <summary>
-    /// Summary description for CodedUITest1
+    /// Summary description for DesktopAppTest
     /// </summary>
     [CodedUITest]
-    public class FusTest
+    public class DesktopAppTest
     {
-        public FusTest()
+        public DesktopAppTest()
         {
         }
 
         [TestMethod]
-        public void Test1()
+        public void DesktopLoginLogout()
         {
-            FusMain.LoginTest();
+            LoginBasic.DA_Login_Logout_Test();
             
+        }
 
-            // To generate code for this test, select "Generate Code for Coded UI Test" from the shortcut menu and select one of the menu items.
-//           this.UIMap.LoginTest();
+        [TestMethod]
+        public void HostConnectDisconnect()
+        {
+            LoginBasic.Host_Connect_Disconnect_Test();
 
         }
 
@@ -70,20 +73,5 @@ namespace FUS
             }
         }
         private TestContext testContextInstance;
-
-        public UIMap UIMap
-        {
-            get
-            {
-                if ((this.map == null))
-                {
-                    this.map = new UIMap();
-                }
-
-                return this.map;
-            }
-        }
-
-        private UIMap map;
     }
 }

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace GeneralUtilities
 {
-    public class LaunchLogin
+    public class LoginConnectUtil
     {
         /// <summary>
         /// Launch '%LOCALAPPDATA%\Citrix\ShareConnectDesktopApp\ShareConnect.Client.WindowsDesktop.exe'
@@ -26,24 +26,36 @@ namespace GeneralUtilities
         private static string uIShareConnectWindowAlternateExePath = "%LOCALAPPDATA%\\Citrix\\ShareConnectDesktopApp\\ShareConnect.Client.WindowsDesktop.e" +
             "xe";
 
-        private static string userEmail = "gjwin10@grr.la";
-        private static string userPwd = "Test1234";
+        private static string defaultUserEmail = "gjwin10@grr.la";
+        private static string defaultUserPwd = "Test1234";
+
+        private static string defaultHostName = "Tester";
+        private static string defaultHostPwd = "Test1234";
 
         public static void LaunchDA()
         {
             // Launch '%LOCALAPPDATA%\Citrix\ShareConnectDesktopApp\ShareConnect.Client.WindowsDesktop.exe'
             ApplicationUnderTest uIShareConnectWindow = ApplicationUnderTest.Launch(uIShareConnectWindowExePath, uIShareConnectWindowAlternateExePath);
 
-            LoginDA();
-            ConnectHost();
-            Thread.Sleep(1000);
-            DisconnectHost();
-            Thread.Sleep(5000);
-            LogoutDA();
+            //LoginDA();
+            //ConnectHost();
+            //Thread.Sleep(1000);
+            //DisconnectHost();
+            //Thread.Sleep(5000);
+            //LogoutDA();
         }
 
-        public static void LoginDA()
+        public static void LoginDA(string userEmail = "", string userPwd = "")
         {
+            if (userEmail == "")
+            {
+                userEmail = defaultUserEmail;
+            }
+            if (userPwd == "")
+            {
+                userPwd = defaultUserPwd;
+            }
+
             Keyboard.SendKeys("{TAB}"); // jump to email
             Thread.Sleep(1000);
             Keyboard.SendKeys("{TAB}");
@@ -57,42 +69,6 @@ namespace GeneralUtilities
             Thread.Sleep(1000);
             Keyboard.SendKeys("{ENTER}");
             Thread.Sleep(10000);
-        }
-
-        public static void ConnectHost()
-        {
-            WinWindow scwin = new WinWindow();
-            scwin.SearchProperties[WinWindow.PropertyNames.Name] = "ShareConnect";
-
-            WpfCustom settingBladeCustom = new WpfCustom(scwin);
-            settingBladeCustom.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.SettingsBlade";
-            settingBladeCustom.SearchProperties[WpfControl.PropertyNames.AutomationId] = "SettingBlade";
-
-            Mouse.Click(settingBladeCustom, new Point(44, 114));
-            Thread.Sleep(5000);
-
-            Keyboard.SendKeys("Tester");
-            Thread.Sleep(1000);
-            Keyboard.SendKeys("{TAB}"); // jump to pwd
-            Keyboard.SendKeys("Test1234");
-            Thread.Sleep(1000);
-            Keyboard.SendKeys("{TAB}"); // jump to "Login", to "Cancel" if no input of credentials
-            Thread.Sleep(1000);
-            Keyboard.SendKeys("{ENTER}");
-            Thread.Sleep(10000);
-
-        }
-
-        public static void DisconnectHost()
-        {
-            WinWindow scwin = new WinWindow();
-            scwin.SearchProperties[WinWindow.PropertyNames.Name] = "ShareConnect";
-
-            WpfCustom bladeViewControlCustom = new WpfCustom(scwin);
-            bladeViewControlCustom.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.MultiSessionBladeView";
-            bladeViewControlCustom.SearchProperties[WpfControl.PropertyNames.AutomationId] = "BladeViewControl";
-
-            Mouse.Click(bladeViewControlCustom, new Point(1869, 18));
         }
 
         public static void LogoutDA()
@@ -128,15 +104,64 @@ namespace GeneralUtilities
             Mouse.Click(yesButton, new Point(35, 21));
             Thread.Sleep(5000);
 
+//          CloseDA();
+        }
+
+        public static void CloseDA()
+        {
             // Click 'Close' button
-            scwin = new WinWindow();
+            WinWindow scwin = new WinWindow();
             scwin.SearchProperties[WinWindow.PropertyNames.Name] = "ShareConnect";
 
             WpfButton closeButton = new WpfButton(scwin);
             closeButton.SearchProperties[WpfButton.PropertyNames.AutomationId] = "Close";
 
             Mouse.Click(closeButton, new Point(35, 21));
+        }
 
+        public static void ConnectHost(string hostName = "", string hostPwd = "")
+        {
+            if (hostName == "")
+            {
+                hostName = defaultHostName;
+            }
+            if (hostPwd == "")
+            {
+                hostPwd = defaultHostPwd;
+            }
+
+            WinWindow scwin = new WinWindow();
+            scwin.SearchProperties[WinWindow.PropertyNames.Name] = "ShareConnect";
+
+            WpfCustom settingBladeCustom = new WpfCustom(scwin);
+            settingBladeCustom.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.SettingsBlade";
+            settingBladeCustom.SearchProperties[WpfControl.PropertyNames.AutomationId] = "SettingBlade";
+
+            Mouse.Click(settingBladeCustom, new Point(44, 114));
+            Thread.Sleep(5000);
+
+            Keyboard.SendKeys(hostName);
+            Thread.Sleep(1000);
+            Keyboard.SendKeys("{TAB}"); // jump to pwd
+            Keyboard.SendKeys(hostPwd);
+            Thread.Sleep(1000);
+            Keyboard.SendKeys("{TAB}"); // jump to "Login", to "Cancel" if no input of credentials
+            Thread.Sleep(1000);
+            Keyboard.SendKeys("{ENTER}");
+            Thread.Sleep(10000);
+
+        }
+
+        public static void DisconnectHost()
+        {
+            WinWindow scwin = new WinWindow();
+            scwin.SearchProperties[WinWindow.PropertyNames.Name] = "ShareConnect";
+
+            WpfCustom bladeViewControlCustom = new WpfCustom(scwin);
+            bladeViewControlCustom.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.MultiSessionBladeView";
+            bladeViewControlCustom.SearchProperties[WpfControl.PropertyNames.AutomationId] = "BladeViewControl";
+
+            Mouse.Click(bladeViewControlCustom, new Point(1869, 18));
         }
     }
 }

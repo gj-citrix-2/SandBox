@@ -53,8 +53,8 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodedUITest1.cs" />
-    <Compile Include="FusMain.cs" />
+    <Compile Include="DesktopAppTest.cs" />
+    <Compile Include="LoginBasic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIMap.cs">
       <DependentUpon>UIMap.uitest</DependentUpon>

@@ -1,4 +1,4 @@
-﻿namespace FUS
+﻿namespace DesktopApp
 {
     using System;
     using System.Collections.Generic;
