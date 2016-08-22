@@ -36,13 +36,6 @@ namespace GeneralUtilities
         {
             // Launch '%LOCALAPPDATA%\Citrix\ShareConnectDesktopApp\ShareConnect.Client.WindowsDesktop.exe'
             ApplicationUnderTest uIShareConnectWindow = ApplicationUnderTest.Launch(uIShareConnectWindowExePath, uIShareConnectWindowAlternateExePath);
-
-            //LoginDA();
-            //ConnectHost();
-            //Thread.Sleep(1000);
-            //DisconnectHost();
-            //Thread.Sleep(5000);
-            //LogoutDA();
         }
 
         public static void LoginDA(string userEmail = "", string userPwd = "")
