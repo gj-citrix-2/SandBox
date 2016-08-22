@@ -16,7 +16,8 @@ namespace DesktopApp
         public static void DA_Login_Logout_Test()
         {
             GeneralUtilities.LoginConnectUtil.LaunchDA();
-            GeneralUtilities.LoginConnectUtil.LoginDA();
+            GeneralUtilities.LoginConnectUtil.LoginDA();    // will use defaults if no arg provided.
+            // GeneralUtilities.LoginConnectUtil.LoginDA("gjwin7@grr.la"); 
             GeneralUtilities.LoginConnectUtil.LogoutDA();
             GeneralUtilities.LoginConnectUtil.CloseDA();
         }
