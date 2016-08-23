@@ -12,12 +12,24 @@ namespace GeneralUtilities
 {
     public class FunctionalButtonsUtil
     {
+        private static log4net.ILog log;
+
+        public FunctionalButtonsUtil()
+        {
+            SCLogHelper myLog = new SCLogHelper(System.Reflection.MethodBase.GetCurrentMethod());
+            log = myLog.Logger;
+        }
+
         public static void OpenFileTransfer()
         {
+            log.Info("******  Start OpenFileTransfer() ********");
+
             Mouse.Location = new Point(1500, 100);  // file transfer
             Thread.Sleep(1000);
             Mouse.Click(new Point(1500, 100));
             Thread.Sleep(3000);
+
+            log.Info("******  End OpenFileTransfer() ********");
         }
 
         public static void CloseFileTransfer()

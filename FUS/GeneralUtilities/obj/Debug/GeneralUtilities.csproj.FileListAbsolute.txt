@@ -26,3 +26,6 @@ C:\ShareConnect\Coded Ui\SandBox\FUS\GeneralUtilities\bin\Debug\Microsoft.Visual
 C:\ShareConnect\Coded Ui\SandBox\FUS\GeneralUtilities\obj\Debug\GeneralUtilities.csprojResolveAssemblyReference.cache
 C:\ShareConnect\Coded Ui\SandBox\FUS\GeneralUtilities\obj\Debug\GeneralUtilities.dll
 C:\ShareConnect\Coded Ui\SandBox\FUS\GeneralUtilities\obj\Debug\GeneralUtilities.pdb
+C:\ShareConnect\Coded Ui\SandBox\FUS\GeneralUtilities\bin\Debug\GeneralUtilities.dll.config
+C:\ShareConnect\Coded Ui\SandBox\FUS\GeneralUtilities\bin\Debug\log4net.dll
+C:\ShareConnect\Coded Ui\SandBox\FUS\GeneralUtilities\bin\Debug\log4net.xml

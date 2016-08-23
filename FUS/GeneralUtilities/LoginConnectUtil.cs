@@ -14,6 +14,14 @@ namespace GeneralUtilities
 {
     public class LoginConnectUtil
     {
+        private static log4net.ILog log;
+
+        public LoginConnectUtil()
+        {
+            SCLogHelper myLog = new SCLogHelper(System.Reflection.MethodBase.GetCurrentMethod());
+            log = myLog.Logger;
+        }
+
         /// <summary>
         /// Launch '%LOCALAPPDATA%\Citrix\ShareConnectDesktopApp\ShareConnect.Client.WindowsDesktop.exe'
         /// </summary>
@@ -34,12 +42,18 @@ namespace GeneralUtilities
 
         public static void LaunchDA()
         {
+            log.Info("******  Start LaunchDA() ********");
+            
             // Launch '%LOCALAPPDATA%\Citrix\ShareConnectDesktopApp\ShareConnect.Client.WindowsDesktop.exe'
             ApplicationUnderTest uIShareConnectWindow = ApplicationUnderTest.Launch(uIShareConnectWindowExePath, uIShareConnectWindowAlternateExePath);
+
+            log.Info("******  Start LaunchDA() ********");
         }
 
         public static void LoginDA(string userEmail = "", string userPwd = "")
         {
+            log.Info("******  Start LoginDA() ********");
+
             if (userEmail == "")
             {
                 userEmail = defaultUserEmail;
@@ -48,6 +62,7 @@ namespace GeneralUtilities
             {
                 userPwd = defaultUserPwd;
             }
+            log.Debug(" === LoginDA uses user email : " + userEmail.ToString());
 
             Keyboard.SendKeys("{TAB}"); // jump to email
             Thread.Sleep(1000);
@@ -62,6 +77,8 @@ namespace GeneralUtilities
             Thread.Sleep(1000);
             Keyboard.SendKeys("{ENTER}");
             Thread.Sleep(10000);
+
+            log.Info("******  End LoginDA() ********");
         }
 
         public static void LogoutDA()
@@ -114,6 +131,8 @@ namespace GeneralUtilities
 
         public static void ConnectHost(string hostName = "", string hostPwd = "")
         {
+            log.Info("******  Start ConnectHost() ********");
+
             if (hostName == "")
             {
                 hostName = defaultHostName;
@@ -122,6 +141,7 @@ namespace GeneralUtilities
             {
                 hostPwd = defaultHostPwd;
             }
+            log.Debug(" === ConnectHost uses Host name : " + hostName.ToString());
 
             WinWindow scwin = new WinWindow();
             scwin.SearchProperties[WinWindow.PropertyNames.Name] = "ShareConnect";
@@ -138,11 +158,12 @@ namespace GeneralUtilities
             Keyboard.SendKeys("{TAB}"); // jump to pwd
             Keyboard.SendKeys(hostPwd);
             Thread.Sleep(1000);
-            Keyboard.SendKeys("{TAB}"); // jump to "Login", to "Cancel" if no input of credentials
-            Thread.Sleep(1000);
+            //Keyboard.SendKeys("{TAB}"); // jump to "Login", to "Cancel" if no input of credentials
+            //Thread.Sleep(1000);
             Keyboard.SendKeys("{ENTER}");
             Thread.Sleep(10000);
 
+            log.Info("******  End ConnectHost() ********");
         }
 
         public static void DisconnectHost()

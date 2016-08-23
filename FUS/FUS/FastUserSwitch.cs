@@ -12,8 +12,13 @@ namespace DesktopApp
 {
     class FastUserSwitch
     {
+        private static SCLogHelper myLog = new SCLogHelper(System.Reflection.MethodBase.GetCurrentMethod());
+        private static log4net.ILog log = myLog.Logger;
+
         public static void RunFUS()
         {
+            log.Info("******  Start RunFUS() ********");
+
             GeneralUtilities.FunctionalButtonsUtil.ClickCtrlAltDelButton();
 
             // click Switch User
@@ -39,7 +44,7 @@ namespace DesktopApp
             Keyboard.SendKeys("Test1234");
             Thread.Sleep(1000);
             Keyboard.SendKeys("{ENTER}");
-            Thread.Sleep(5000);
+            Thread.Sleep(3000);
 
             //following is non-sense for this particulkar laptop
             Keyboard.SendKeys("{TAB}");
@@ -49,6 +54,8 @@ namespace DesktopApp
 
             // wait for 20 seconds, should log back in again 
             //Thread.Sleep(20000);
+
+            log.Info("******  End RunFUS() ********");
 
         }
     }

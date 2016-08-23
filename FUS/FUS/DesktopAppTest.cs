@@ -19,8 +19,12 @@ namespace DesktopApp
     [CodedUITest]
     public class DesktopAppTest
     {
+        private static log4net.ILog log;
+
         public DesktopAppTest()
         {
+            SCLogHelper myLog = new SCLogHelper(System.Reflection.MethodBase.GetCurrentMethod());
+            log = myLog.Logger;
         }
 
         [TestMethod]
@@ -48,8 +52,14 @@ namespace DesktopApp
         [TestMethod]
         public void SS_FastUserSwitch()
         {
+            log.Info("******  Start SS_FastUserSwitch() ********");
+
+            //GeneralUtilities.LoginConnectUtil.ConnectHost();
+
             Mouse.Click();  // take me out when whole sequence is executed
             FastUserSwitch.RunFUS();
+
+            log.Info("******  End SS_FastUserSwitch() ********");
         }
 
 
