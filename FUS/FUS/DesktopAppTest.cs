@@ -27,15 +27,31 @@ namespace DesktopApp
         public void DesktopLoginLogout()
         {
             LoginBasic.DA_Login_Logout_Test();
-            
         }
 
         [TestMethod]
         public void HostConnectDisconnect()
         {
             LoginBasic.Host_Connect_Disconnect_Test();
-
         }
+
+        [TestMethod]
+        public void SS_FunctionalButtons()
+        {
+            Mouse.Click();  // take me out when whole sequence is executed
+            FunctionButtonsBasic.Click_FileTransfer_Button();
+
+            FunctionButtonsBasic.Click_FullScreen_Button();
+            FunctionButtonsBasic.Click_ExitFullScreen_Button();
+        }
+
+        [TestMethod]
+        public void SS_FastUserSwitch()
+        {
+            Mouse.Click();  // take me out when whole sequence is executed
+            FastUserSwitch.RunFUS();
+        }
+
 
         #region Additional test attributes
 

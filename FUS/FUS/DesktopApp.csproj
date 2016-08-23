@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DesktopAppTest.cs" />
+    <Compile Include="FastUserSwitch.cs" />
+    <Compile Include="FunctionButtonsBasic.cs" />
     <Compile Include="LoginBasic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIMap.cs">
