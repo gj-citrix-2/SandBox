@@ -1,7 +1,0 @@
-C:\ShareConnect\Coded Ui\FUS\FUS\bin\Debug\FUS.dll
-C:\ShareConnect\Coded Ui\FUS\FUS\bin\Debug\FUS.pdb
-C:\ShareConnect\Coded Ui\FUS\FUS\obj\Debug\FUS.csprojResolveAssemblyReference.cache
-C:\ShareConnect\Coded Ui\FUS\FUS\obj\Debug\FUS.dll
-C:\ShareConnect\Coded Ui\FUS\FUS\obj\Debug\FUS.pdb
-C:\ShareConnect\Coded Ui\FUS\FUS\bin\Debug\GeneralUtilities.dll
-C:\ShareConnect\Coded Ui\FUS\FUS\bin\Debug\GeneralUtilities.pdb
