@@ -13,17 +13,22 @@ namespace GeneralUtilities
 
         public SCLogHelper()
         {
-            m_logger = log4net.LogManager.GetLogger("");
+//            m_logger = log4net.LogManager.GetLogger("");
         }
 
         public SCLogHelper(System.Reflection.MethodBase methbase)
         {
-            m_logger = log4net.LogManager.GetLogger(methbase.DeclaringType);
+//            m_logger = log4net.LogManager.GetLogger(methbase.DeclaringType);
         }
 
-        public log4net.ILog Logger
+        public static log4net.ILog Logger()
         {
-             get { return m_logger; }
+            return m_logger;
+        }
+
+        public static log4net.ILog Logger(System.Reflection.MethodBase methbase)
+        {
+             return m_logger = log4net.LogManager.GetLogger(methbase.DeclaringType);
         } 
     }
 }

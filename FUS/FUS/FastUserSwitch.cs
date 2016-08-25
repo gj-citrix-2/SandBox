@@ -12,23 +12,23 @@ namespace DesktopApp
 {
     class FastUserSwitch
     {
-        private static SCLogHelper myLog = new SCLogHelper(System.Reflection.MethodBase.GetCurrentMethod());
-        private static log4net.ILog log = myLog.Logger;
+        private static string[] userNameAry = { "RDULGWOJIEHW02\\Tester", "RDULGWOJIEHW02\\Joker", "RDULGWOJIEHW02\\Joker", "RDULGWOJIEHW02\\Tester", "RDULGWOJIEHW02\\Tester" };
+        private static string pwd = "Test1234";
 
-        public static void RunFUS()
+        public static void RunFUS(int loopCnt)
         {
-            log.Info("******  Start RunFUS() ********");
+            Logger.log.Info("******  Start RunFUS() with loopCnt = " + loopCnt + "  ********");
 
             GeneralUtilities.FunctionalButtonsUtil.ClickCtrlAltDelButton();
 
             // click Switch User
-            Mouse.Location = new Point(908, 560);  // sign out
+            // Mouse.Location = new Point(908, 560);  // sign out
+            Mouse.Location = new Point(908, 480);   // switch user
             Thread.Sleep(1000);
-            Mouse.Click(new Point(908, 560));
-            Thread.Sleep(3000);
+            Mouse.Click(new Point(908, 480));
 
-            Thread.Sleep(20000);
-            Mouse.Click();
+            Thread.Sleep(60000);
+            Mouse.Click();   // ??? need this
             Thread.Sleep(3000);
 
             // logon notice
@@ -37,25 +37,34 @@ namespace DesktopApp
             Mouse.Click(new Point(700, 740));
 
             // Login credentials
+            int idx = loopCnt % userNameAry.Length;
+            string uName = userNameAry[idx];
+            Logger.log.Info("    ===  Connect to Host uses user name : " + uName + "  === ");
+
             Thread.Sleep(5000);
-            Keyboard.SendKeys("RDULGWOJIEHW02\\Tester");
+            Keyboard.SendKeys(uName);
             Thread.Sleep(1000);
             Keyboard.SendKeys("{TAB}"); // jump to pwd
-            Keyboard.SendKeys("Test1234");
+            Keyboard.SendKeys(pwd);
             Thread.Sleep(1000);
             Keyboard.SendKeys("{ENTER}");
             Thread.Sleep(3000);
 
-            //following is non-sense for this particulkar laptop
+            //following is non-sense for this particulkar win10 laptop
             Keyboard.SendKeys("{TAB}");
             Keyboard.SendKeys("{TAB}");
             Thread.Sleep(1000);
             Keyboard.SendKeys("{ENTER}");
 
             // wait for 20 seconds, should log back in again 
-            //Thread.Sleep(20000);
+            Thread.Sleep(30000);
 
-            log.Info("******  End RunFUS() ********");
+            GeneralUtilities.FunctionalButtonsUtil.OpenFileTransfer();
+            Thread.Sleep(5000);
+            GeneralUtilities.FunctionalButtonsUtil.CloseFileTransfer();
+            Thread.Sleep(1000);
+
+            Logger.log.Info("******  End RunFUS() ********");
 
         }
     }

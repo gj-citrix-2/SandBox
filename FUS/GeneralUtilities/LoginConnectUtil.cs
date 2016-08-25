@@ -12,16 +12,13 @@ using System.Threading.Tasks;
 
 namespace GeneralUtilities
 {
+    public static class Logger
+    {
+        public static log4net.ILog log = SCLogHelper.Logger(System.Reflection.MethodBase.GetCurrentMethod());
+    }
+
     public class LoginConnectUtil
     {
-        private static log4net.ILog log;
-
-        public LoginConnectUtil()
-        {
-            SCLogHelper myLog = new SCLogHelper(System.Reflection.MethodBase.GetCurrentMethod());
-            log = myLog.Logger;
-        }
-
         /// <summary>
         /// Launch '%LOCALAPPDATA%\Citrix\ShareConnectDesktopApp\ShareConnect.Client.WindowsDesktop.exe'
         /// </summary>
@@ -42,17 +39,17 @@ namespace GeneralUtilities
 
         public static void LaunchDA()
         {
-            log.Info("******  Start LaunchDA() ********");
+            Logger.log.Info("******  Start LaunchDA() ********");
             
             // Launch '%LOCALAPPDATA%\Citrix\ShareConnectDesktopApp\ShareConnect.Client.WindowsDesktop.exe'
             ApplicationUnderTest uIShareConnectWindow = ApplicationUnderTest.Launch(uIShareConnectWindowExePath, uIShareConnectWindowAlternateExePath);
 
-            log.Info("******  Start LaunchDA() ********");
+            Logger.log.Info("******  Start LaunchDA() ********");
         }
 
         public static void LoginDA(string userEmail = "", string userPwd = "")
         {
-            log.Info("******  Start LoginDA() ********");
+            Logger.log.Info("******  Start LoginDA() ********");
 
             if (userEmail == "")
             {
@@ -62,7 +59,7 @@ namespace GeneralUtilities
             {
                 userPwd = defaultUserPwd;
             }
-            log.Debug(" === LoginDA uses user email : " + userEmail.ToString());
+            Logger.log.Debug(" === LoginDA uses user email : " + userEmail.ToString());
 
             Keyboard.SendKeys("{TAB}"); // jump to email
             Thread.Sleep(1000);
@@ -78,7 +75,7 @@ namespace GeneralUtilities
             Keyboard.SendKeys("{ENTER}");
             Thread.Sleep(10000);
 
-            log.Info("******  End LoginDA() ********");
+            Logger.log.Info("******  End LoginDA() ********");
         }
 
         public static void LogoutDA()
@@ -129,19 +126,19 @@ namespace GeneralUtilities
             Mouse.Click(closeButton, new Point(35, 21));
         }
 
-        public static void ConnectHost(string hostName = "", string hostPwd = "")
+        public static void ConnectHost(string userName = "", string hostPwd = "")
         {
-            log.Info("******  Start ConnectHost() ********");
+            Logger.log.Info("******  Start ConnectHost() ********");
 
-            if (hostName == "")
+            if (userName == "")
             {
-                hostName = defaultHostName;
+                userName = defaultHostName;
             }
             if (hostPwd == "")
             {
                 hostPwd = defaultHostPwd;
             }
-            log.Debug(" === ConnectHost uses Host name : " + hostName.ToString());
+            Logger.log.Debug("    ===  Connect to Host uses user name : " + userName + "  === ");
 
             WinWindow scwin = new WinWindow();
             scwin.SearchProperties[WinWindow.PropertyNames.Name] = "ShareConnect";
@@ -150,10 +147,11 @@ namespace GeneralUtilities
             settingBladeCustom.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.SettingsBlade";
             settingBladeCustom.SearchProperties[WpfControl.PropertyNames.AutomationId] = "SettingBlade";
 
+            Thread.Sleep(1000);
             Mouse.Click(settingBladeCustom, new Point(44, 114));
-            Thread.Sleep(5000);
+            Thread.Sleep(8000);
 
-            Keyboard.SendKeys(hostName);
+            Keyboard.SendKeys(userName);
             Thread.Sleep(1000);
             Keyboard.SendKeys("{TAB}"); // jump to pwd
             Keyboard.SendKeys(hostPwd);
@@ -161,9 +159,12 @@ namespace GeneralUtilities
             //Keyboard.SendKeys("{TAB}"); // jump to "Login", to "Cancel" if no input of credentials
             //Thread.Sleep(1000);
             Keyboard.SendKeys("{ENTER}");
-            Thread.Sleep(10000);
+            Thread.Sleep(20000);
 
-            log.Info("******  End ConnectHost() ********");
+            Mouse.Click(); // ??? need this
+            Thread.Sleep(1000);
+
+            Logger.log.Info("******  End ConnectHost() ********");
         }
 
         public static void DisconnectHost()
