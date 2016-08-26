@@ -32,7 +32,23 @@ namespace DesktopApp
         [TestMethod]
         public void DesktopLoginLogout()
         {
+            Logger.log.Info("=======================  Start DesktopLoginLogout() =======================");
+
             LoginBasic.DA_Login_Logout_Test();
+
+            Logger.log.Info("=======================  End DesktopLoginLogout() =======================");
+        }
+
+        [TestMethod]
+        public void DesktopLoginError()
+        {
+            LoginBasic.DA_Login_Error_Test();
+        }
+
+        [TestMethod]
+        public void DesktopVerifyUserInfo()
+        {
+            LoginBasic.DA_Verify_User_Info();
         }
 
         [TestMethod]
@@ -54,7 +70,7 @@ namespace DesktopApp
         [TestMethod]
         public void SS_FastUserSwitch()
         {
-            Logger.log.Info("******  Start SS_FastUserSwitch() ********");
+            Logger.log.Info("=======================  Start SS_FastUserSwitch() =======================");
 
             GeneralUtilities.LoginConnectUtil.ConnectHost();
 
@@ -67,7 +83,7 @@ namespace DesktopApp
             }
 
             GeneralUtilities.LoginConnectUtil.DisconnectHost();
-            Logger.log.Info("******  End SS_FastUserSwitch() ********");
+            Logger.log.Info("=======================  End SS_FastUserSwitch() =======================");
         }
 
 
@@ -98,13 +114,16 @@ namespace DesktopApp
                 // Get hold of TestContext.m_currentResult.m_errorInfo.m_stackTrace (contains the stack trace details from log)
                 var field = TestContext.GetType().GetField("m_currentResult", getterFlags);
                 var m_currentResult = field.GetValue(TestContext);
-                Logger.log.Error("Running Results: " + m_currentResult.ToString());
-
+                Logger.log.Error("*****  Running Results: " + m_currentResult.ToString());
                 field = m_currentResult.GetType().GetField("m_errorInfo", getterFlags);
                 var m_errorInfo = field.GetValue(m_currentResult);
+                field = m_errorInfo.GetType().GetField("m_message", getterFlags);
+                m_message = field.GetValue(m_errorInfo) as string;
+                Logger.log.Error("                        " + m_message.ToString());
                 field = m_errorInfo.GetType().GetField("m_stackTrace", getterFlags);
                 m_message = field.GetValue(m_errorInfo) as string;
-                Logger.log.Error("Running Results: " + m_message.ToString());
+                Logger.log.Error("                        Stack Trace : ");
+                Logger.log.Error("                                    " + m_message.ToString());
             }
             else
             {

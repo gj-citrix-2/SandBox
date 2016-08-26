@@ -22,14 +22,32 @@ namespace DesktopApp
             GeneralUtilities.LoginConnectUtil.CloseDA();
         }
 
-        public static void Host_Connect_Disconnect_Test()
+        public static void DA_Login_Error_Test()
+        {
+            GeneralUtilities.LoginConnectUtil.LaunchDA();
+            GeneralUtilities.LoginConnectUtil.LoginDA_Faileure("gjwin7@grr.la", "1111");
+            GeneralUtilities.LoginConnectUtil.LoginDA_Faileure("abc@grr.la", "2222");
+            GeneralUtilities.LoginConnectUtil.CloseDA();
+        }
+
+        public static void DA_Verify_User_Info()
         {
             GeneralUtilities.LoginConnectUtil.LaunchDA();
             GeneralUtilities.LoginConnectUtil.LoginDA();
-            GeneralUtilities.LoginConnectUtil.ConnectHost();
-            GeneralUtilities.LoginConnectUtil.DisconnectHost();
+            GeneralUtilities.DesktopAppHomePageUtil.VerifyUserInfo("gjwin10 wang", "gjwin10@grr.la");
             GeneralUtilities.LoginConnectUtil.LogoutDA();
             GeneralUtilities.LoginConnectUtil.CloseDA();
+        }
+
+        public static void Host_Connect_Disconnect_Test()
+        {
+            //GeneralUtilities.LoginConnectUtil.LaunchDA();
+            //GeneralUtilities.LoginConnectUtil.LoginDA();
+            GeneralUtilities.LoginConnectUtil.CancelConnectHost();
+            //GeneralUtilities.LoginConnectUtil.ConnectHost();
+            //GeneralUtilities.LoginConnectUtil.DisconnectHost();
+            //GeneralUtilities.LoginConnectUtil.LogoutDA();
+            //GeneralUtilities.LoginConnectUtil.CloseDA();
         }
     }
 }

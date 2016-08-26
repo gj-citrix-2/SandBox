@@ -26,11 +26,11 @@ namespace GeneralUtilities
 
         public static void CloseFileTransfer()
         {
-            WinWindow scwin = new WinWindow();
-            scwin.SearchProperties[WinWindow.PropertyNames.Name] = "win10 aws - File Transfer";
-            scwin.SearchProperties.Add(new PropertyExpression(WinWindow.PropertyNames.ClassName, "HwndWrapper", PropertyExpressionOperator.Contains));
+            WinWindow shareConnectWindow = new WinWindow();
+            shareConnectWindow.SearchProperties[WinWindow.PropertyNames.Name] = "win10 aws - File Transfer";
+            shareConnectWindow.SearchProperties.Add(new PropertyExpression(WinWindow.PropertyNames.ClassName, "HwndWrapper", PropertyExpressionOperator.Contains));
 
-            WinButton closeButton = new WinButton(scwin);
+            WinButton closeButton = new WinButton(shareConnectWindow);
             closeButton.SearchProperties[WinButton.PropertyNames.Name] = "Close";
 			
 			Mouse.Click(closeButton, new Point(19, 11));
