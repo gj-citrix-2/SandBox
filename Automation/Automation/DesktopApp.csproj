@@ -57,10 +57,11 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesktopAppHomePageTest.cs" />
     <Compile Include="DesktopAppTest.cs" />
-    <Compile Include="FastUserSwitch.cs" />
-    <Compile Include="FunctionButtonsBasic.cs" />
-    <Compile Include="LoginBasic.cs" />
+    <Compile Include="FastUserSwitchTest.cs" />
+    <Compile Include="FunctionButtonsBasicTest.cs" />
+    <Compile Include="LoginBasicTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIMap.cs">
       <DependentUpon>UIMap.uitest</DependentUpon>

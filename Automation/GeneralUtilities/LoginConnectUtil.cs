@@ -38,9 +38,9 @@ namespace GeneralUtilities
             Logger.log.Info("******  Start LaunchDA() ********");
             
             // Launch '%LOCALAPPDATA%\Citrix\ShareConnectDesktopApp\ShareConnect.Client.WindowsDesktop.exe'
-            ApplicationUnderTest uIShareConnectWindow = ApplicationUnderTest.Launch(uIShareConnectWindowExePath, uIShareConnectWindowAlternateExePath);
+            ApplicationUnderTest.Launch(uIShareConnectWindowExePath, uIShareConnectWindowAlternateExePath);
 
-            Logger.log.Info("******  Start LaunchDA() ********");
+            Logger.log.Info("******  End LaunchDA() ********");
         }
 
         public static void LoginDA(string userEmail = "", string userPwd = "")
@@ -57,61 +57,19 @@ namespace GeneralUtilities
             }
 
             Logger.log.Debug(" === LoginDA uses user email : " + userEmail.ToString());
-            WinWindow shareConnectWindow = new WinWindow();
-            shareConnectWindow.SearchProperties[WinWindow.PropertyNames.Name] = "ShareConnect";
-            shareConnectWindow.SearchProperties.Add(new PropertyExpression(WinWindow.PropertyNames.ClassName, "HwndWrapper", PropertyExpressionOperator.Contains));
 
-            // *** no need this WpfPane, there no ambiguity to find shareConnectWindow under it
-            //WpfPane loginFramePane = new WpfPane(shareConnectWindow);
-            //loginFramePane.SearchProperties[WpfPane.PropertyNames.ClassName] = "Uia.Frame";
-            //loginFramePane.SearchProperties[WpfPane.PropertyNames.AutomationId] = "LoginFrame";
+            HtmlEdit credentialsEmailEdit = ShareConnectControls.GetCredentialsEmailEdit();
 
-            WpfPane browserPane = new WpfPane(shareConnectWindow);
-            browserPane.SearchProperties[WpfPane.PropertyNames.ClassName] = "Uia.HwndHost";
-            browserPane.SearchProperties[WpfPane.PropertyNames.AutomationId] = "Browser";
+            HtmlEdit credentialsPasswordEdit = ShareConnectControls.GetCredentialsPasswordEdit();
 
-            WinClient itemClient = new WinClient(browserPane);
-            itemClient.SearchProperties[WinControl.PropertyNames.ClassName] = "Internet Explorer_Server";
-
-            HtmlDocument shareFileLoginDocument = new HtmlDocument(itemClient);
-            shareFileLoginDocument.FilterProperties[HtmlDocument.PropertyNames.Title] = "ShareFile Login";
-            shareFileLoginDocument.FilterProperties[HtmlDocument.PropertyNames.AbsolutePath] = "/oauth/authorize";
-            shareFileLoginDocument.FilterProperties[HtmlDocument.PropertyNames.PageUrl] = "https://secure.sharefiletest.com/oauth/authorize?response_type=code&client_id=RrB" +
-                "QuHuM12dWToUvOHaEpNK3OTgmxGgd&redirect_uri=https:%2F%2Fi1app.sc.test.expertcity." +
-                "com%2Fmembers%2FsocialLogin.tmpl%3FauthProvider%3DshareFile&state=&theme=airtop";
-
-            HtmlEdit credentialsemailEdit = new HtmlEdit(shareFileLoginDocument);
-            credentialsemailEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = "credentials-email";
-            credentialsemailEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = "txtinput username input-item";
-            credentialsemailEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "tabindex=\"1\" class=\"txtinput username in";
-            credentialsemailEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "2";
-
-            HtmlEdit credentialspasswordEdit = new HtmlEdit(shareFileLoginDocument);
-            credentialspasswordEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = "credentials-password";
-            credentialspasswordEdit.SearchProperties[HtmlEdit.PropertyNames.Type] = "PASSWORD";
-            credentialspasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = "txtinput password input-item";
-            credentialspasswordEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "tabindex=\"2\" class=\"txtinput password in";
-            credentialspasswordEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "3";
-
-            HtmlDiv applicationHostPane = new HtmlDiv(shareFileLoginDocument);
-            applicationHostPane.SearchProperties[HtmlDiv.PropertyNames.Id] = "applicationHost";
-            applicationHostPane.FilterProperties[HtmlDiv.PropertyNames.InnerText] = "Sign In using your ShareFile account\r\n\r\n";
-            applicationHostPane.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "id=\"applicationHost\"";
-            applicationHostPane.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "15";
-
-            HtmlButton signInButton = new HtmlButton(applicationHostPane);
-            signInButton.SearchProperties[HtmlButton.PropertyNames.DisplayText] = "Sign In  ";
-            signInButton.SearchProperties[HtmlButton.PropertyNames.Type] = "submit";
-            signInButton.FilterProperties[HtmlButton.PropertyNames.Class] = "navlink fwdlink";
-            signInButton.FilterProperties[HtmlButton.PropertyNames.ControlDefinition] = "class=\"navlink fwdlink\" type=\"submit\" da";
-            signInButton.FilterProperties[HtmlButton.PropertyNames.TagInstance] = "1";
+            HtmlButton signInButton = ShareConnectControls.GetSignInButton();
 
 
             // Type 'abc@gmail.com' in 'credentials-email' text box
-            credentialsemailEdit.Text = userEmail;
+            credentialsEmailEdit.Text = userEmail;
 
             // Type '********' in 'credentials-password' text box
-            credentialspasswordEdit.Text = userPwd;
+            credentialsPasswordEdit.Text = userPwd;
 
             // Click 'Sign In' button
             Mouse.Click(signInButton, new Point(218, 21));
@@ -134,61 +92,24 @@ namespace GeneralUtilities
             }
 
             Logger.log.Debug(" === LoginDA_Faileure uses user email : " + userEmail.ToString());
-            WinWindow shareConnectWindow = new WinWindow();
-            shareConnectWindow.SearchProperties[WinWindow.PropertyNames.Name] = "ShareConnect";
-            shareConnectWindow.SearchProperties.Add(new PropertyExpression(WinWindow.PropertyNames.ClassName, "HwndWrapper", PropertyExpressionOperator.Contains));
 
-            WpfPane browserPane = new WpfPane(shareConnectWindow);
-            browserPane.SearchProperties[WpfPane.PropertyNames.ClassName] = "Uia.HwndHost";
-            browserPane.SearchProperties[WpfPane.PropertyNames.AutomationId] = "Browser";
+            HtmlEdit credentialsEmailEdit = ShareConnectControls.GetCredentialsEmailEdit();
 
-            WinClient itemClient = new WinClient(browserPane);
-            itemClient.SearchProperties[WinControl.PropertyNames.ClassName] = "Internet Explorer_Server";
+            HtmlEdit credentialsPasswordEdit = ShareConnectControls.GetCredentialsPasswordEdit();
 
-            HtmlDocument shareFileLoginDocument = new HtmlDocument(itemClient);
-            shareFileLoginDocument.FilterProperties[HtmlDocument.PropertyNames.Title] = "ShareFile Login";
-            shareFileLoginDocument.FilterProperties[HtmlDocument.PropertyNames.AbsolutePath] = "/oauth/authorize";
-            shareFileLoginDocument.FilterProperties[HtmlDocument.PropertyNames.PageUrl] = "https://secure.sharefiletest.com/oauth/authorize?response_type=code&client_id=RrB" +
-                "QuHuM12dWToUvOHaEpNK3OTgmxGgd&redirect_uri=https:%2F%2Fi1app.sc.test.expertcity." +
-                "com%2Fmembers%2FsocialLogin.tmpl%3FauthProvider%3DshareFile&state=&theme=airtop";
-
-            HtmlEdit credentialsemailEdit = new HtmlEdit(shareFileLoginDocument);
-            credentialsemailEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = "credentials-email";
-            credentialsemailEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = "txtinput username input-item";
-            credentialsemailEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "tabindex=\"1\" class=\"txtinput username in";
-            credentialsemailEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "2";
-
-            HtmlEdit credentialspasswordEdit = new HtmlEdit(shareFileLoginDocument);
-            credentialspasswordEdit.SearchProperties[HtmlEdit.PropertyNames.Id] = "credentials-password";
-            credentialspasswordEdit.SearchProperties[HtmlEdit.PropertyNames.Type] = "PASSWORD";
-            credentialspasswordEdit.FilterProperties[HtmlEdit.PropertyNames.Class] = "txtinput password input-item";
-            credentialspasswordEdit.FilterProperties[HtmlEdit.PropertyNames.ControlDefinition] = "tabindex=\"2\" class=\"txtinput password in";
-            credentialspasswordEdit.FilterProperties[HtmlEdit.PropertyNames.TagInstance] = "3";
-
-            HtmlDiv applicationHostPane = new HtmlDiv(shareFileLoginDocument);
-            applicationHostPane.SearchProperties[HtmlDiv.PropertyNames.Id] = "applicationHost";
-            applicationHostPane.FilterProperties[HtmlDiv.PropertyNames.InnerText] = "Sign In using your ShareFile account\r\n\r\n";
-            applicationHostPane.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "id=\"applicationHost\"";
-            applicationHostPane.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "15";
-
-            HtmlDiv usernameorPasswordwaPane = new HtmlDiv(applicationHostPane);
+            HtmlDiv usernameorPasswordwaPane = new HtmlDiv(ShareConnectControls.GetApplicationHostPane());
             usernameorPasswordwaPane.FilterProperties[HtmlDiv.PropertyNames.Class] = "error";
             usernameorPasswordwaPane.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "class=\"error\" data-bind=\"html: ErrorMessage\"";
             usernameorPasswordwaPane.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "22";
 
-            HtmlButton signInButton = new HtmlButton(applicationHostPane);
-            signInButton.SearchProperties[HtmlButton.PropertyNames.DisplayText] = "Sign In  ";
-            signInButton.SearchProperties[HtmlButton.PropertyNames.Type] = "submit";
-            signInButton.FilterProperties[HtmlButton.PropertyNames.Class] = "navlink fwdlink";
-            signInButton.FilterProperties[HtmlButton.PropertyNames.ControlDefinition] = "class=\"navlink fwdlink\" type=\"submit\" da";
-            signInButton.FilterProperties[HtmlButton.PropertyNames.TagInstance] = "1";
+            HtmlButton signInButton = ShareConnectControls.GetSignInButton();
 
 
             // Type email in 'credentials-email' text box
-            credentialsemailEdit.Text = userEmail;
+            credentialsEmailEdit.Text = userEmail;
 
             // Type pwd in 'credentials-password' text box
-            credentialspasswordEdit.Text = userPwd;
+            credentialsPasswordEdit.Text = userPwd;
 
             // Click 'Sign In' button
             Mouse.Click(signInButton, new Point(218, 21));
@@ -201,46 +122,31 @@ namespace GeneralUtilities
 
         public static void LogoutDA()
         {
-            WinWindow shareConnectWindow = new WinWindow();
-            shareConnectWindow.SearchProperties[WinWindow.PropertyNames.Name] = "ShareConnect";
+            Logger.log.Info("******  Start LogoutDA() ********");
 
-            WpfCustom bladeViewControlCustom = new WpfCustom(shareConnectWindow);
-            bladeViewControlCustom.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.MultiSessionBladeView";
-            bladeViewControlCustom.SearchProperties[WpfControl.PropertyNames.AutomationId] = "BladeViewControl";
-
-            WpfImage settings_buttonImage = new WpfImage(bladeViewControlCustom);
-            settings_buttonImage.SearchProperties[WpfImage.PropertyNames.AutomationId] = "Settings_button";
+            WpfImage settings_buttonImage = ShareConnectControls.GetSettings_buttonImage();
 
             Mouse.Click(settings_buttonImage, new Point(6, 6));
             Thread.Sleep(3000);
 
-            WpfCustom settingBladeCustom = new WpfCustom(shareConnectWindow);
-            settingBladeCustom.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.SettingsBlade";
-            settingBladeCustom.SearchProperties[WpfControl.PropertyNames.AutomationId] = "SettingBlade";
-
-            WpfCustom aboutBladeCustom = new WpfCustom(settingBladeCustom);
-            aboutBladeCustom.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.AboutBlade";
-            aboutBladeCustom.SearchProperties[WpfControl.PropertyNames.AutomationId] = "AboutBlade";
+            WpfCustom aboutBladeCustom = ShareConnectControls.GetAboutBladeCustom();
 
             Mouse.Click(aboutBladeCustom, new Point(45, 330));
             Thread.Sleep(3000);
 
             // Click 'Yes' button
-            WpfButton yesButton = new WpfButton(shareConnectWindow);
-            yesButton.SearchProperties[WpfButton.PropertyNames.AutomationId] = "OkButton";
+            WpfButton yesButton = ShareConnectControls.GetConfirmSignOutYesButton();
 
             Mouse.Click(yesButton, new Point(35, 21));
             Thread.Sleep(8000);
+
+            Logger.log.Info("******  End LogoutDA() ********");
         }
 
         public static void CloseDA()
         {
             // Click 'Close' button
-            WinWindow shareConnectWindow = new WinWindow();
-            shareConnectWindow.SearchProperties[WinWindow.PropertyNames.Name] = "ShareConnect";
-
-            WpfButton closeButton = new WpfButton(shareConnectWindow);
-            closeButton.SearchProperties[WpfButton.PropertyNames.AutomationId] = "Close";
+            WpfButton closeButton = ShareConnectControls.GetDesktopAppCloseButtonX();
 
             Mouse.Click(closeButton, new Point(35, 21));
         }
@@ -259,12 +165,7 @@ namespace GeneralUtilities
             }
             Logger.log.Debug("    ===  Connect to Host uses user name : " + userName + "  === ");
 
-            WinWindow shareConnectWindow = new WinWindow();
-            shareConnectWindow.SearchProperties[WinWindow.PropertyNames.Name] = "ShareConnect";
-
-            WpfCustom settingBladeCustom = new WpfCustom(shareConnectWindow);
-            settingBladeCustom.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.SettingsBlade";
-            settingBladeCustom.SearchProperties[WpfControl.PropertyNames.AutomationId] = "SettingBlade";
+            WpfCustom settingBladeCustom = ShareConnectControls.GetSettingBladeCustom();
 
             Thread.Sleep(1000);
             Mouse.Click(settingBladeCustom, new Point(44, 114));
@@ -275,8 +176,6 @@ namespace GeneralUtilities
             Keyboard.SendKeys("{TAB}"); // jump to pwd
             Keyboard.SendKeys(hostPwd);
             Thread.Sleep(1000);
-            //Keyboard.SendKeys("{TAB}"); // jump to "Login", to "Cancel" if no input of credentials
-            //Thread.Sleep(1000);
             Keyboard.SendKeys("{ENTER}");
             Thread.Sleep(20000);
 
@@ -292,12 +191,7 @@ namespace GeneralUtilities
 
             string userName = ConstantsUtil.defaultHostName;
 
-            WinWindow shareConnectWindow = new WinWindow();
-            shareConnectWindow.SearchProperties[WinWindow.PropertyNames.Name] = "ShareConnect";
-
-            WpfCustom settingBladeCustom = new WpfCustom(shareConnectWindow);
-            settingBladeCustom.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.SettingsBlade";
-            settingBladeCustom.SearchProperties[WpfControl.PropertyNames.AutomationId] = "SettingBlade";
+            WpfCustom settingBladeCustom = ShareConnectControls.GetSettingBladeCustom();
 
             Thread.Sleep(1000);
             Mouse.Click(settingBladeCustom, new Point(44, 114));
@@ -311,22 +205,21 @@ namespace GeneralUtilities
             Keyboard.SendKeys("{ENTER}");
             Thread.Sleep(3000);
 
-            // xxxx need to check bladeview is up again
-            //x = settingBladeCustom.WaitForControlEnabled();
+            // xxxx need to check bladeview is up again ??? is following working ???
+            Assert.IsTrue(settingBladeCustom.GetProperty("Enabled").Equals(true));
 
-            Logger.log.Info("******  End ConnectHost() ********");
+            Logger.log.Info("******  End CancelConnectHost() ********");
         }
 
         public static void DisconnectHost()
         {
-            WinWindow shareConnectWindow = new WinWindow();
-            shareConnectWindow.SearchProperties[WinWindow.PropertyNames.Name] = "ShareConnect";
+            Logger.log.Info("******  Start DisconnectHost() ********");
 
-            WpfCustom bladeViewControlCustom = new WpfCustom(shareConnectWindow);
-            bladeViewControlCustom.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.MultiSessionBladeView";
-            bladeViewControlCustom.SearchProperties[WpfControl.PropertyNames.AutomationId] = "BladeViewControl";
+            WpfCustom bladeViewControlCustom = ShareConnectControls.GetBladeViewControlCustom();
 
             Mouse.Click(bladeViewControlCustom, new Point(1869, 18));
+
+            Logger.log.Info("******  End DisconnectHost() ********");
         }
     }
 }

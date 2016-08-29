@@ -15,6 +15,21 @@ namespace DesktopApp
         private static string[] userNameAry = { "RDULGWOJIEHW02\\Tester", "RDULGWOJIEHW02\\Joker", "RDULGWOJIEHW02\\Joker", "RDULGWOJIEHW02\\Tester", "RDULGWOJIEHW02\\Tester" };
         private static string pwd = "Test1234";
 
+        public static void FusTest()
+        {
+            GeneralUtilities.LoginConnectUtil.ConnectHost();
+
+            Mouse.Click();  // take me out when whole sequence is executed
+
+            for (int i = 0; i < 1; i++)
+            {
+                // Logger.log.Info("  === LOOP # " + i + "  ===");
+                RunFUS(i);
+            }
+
+            GeneralUtilities.LoginConnectUtil.DisconnectHost();
+        }
+
         public static void RunFUS(int loopCnt)
         {
             Logger.log.Info("******  Start RunFUS() with loopCnt = " + loopCnt + "  ********");

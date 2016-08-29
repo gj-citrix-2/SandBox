@@ -9,32 +9,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GeneralUtilities
+namespace DesktopApp
 {
-    public class DesktopAppHomePageUtil
+    public class DesktopAppHomePageTest
     {
+        public static void DA_Verify_User_Info()
+        {
+            GeneralUtilities.LoginConnectUtil.LaunchDA();
+            GeneralUtilities.LoginConnectUtil.LoginDA();
+            VerifyUserInfo("gjwin10 wang", "gjwin10@grr.la");
+            GeneralUtilities.LoginConnectUtil.LogoutDA();
+            GeneralUtilities.LoginConnectUtil.CloseDA();
+        }
 
-        public static void VerifyUserInfo(string userName = "", string userEmail = "")
+        private static void VerifyUserInfo(string userName = "", string userEmail = "")
         {
             Logger.log.Info("******  Start VerifyUserInfo() ********");
 
             if (userName == "")
             {
-                userName = ConstantsUtil.defaultUserName;
+                userName = GeneralUtilities.ConstantsUtil.defaultUserName;
             }
             if (userEmail == "")
             {
-                userEmail = ConstantsUtil.defaultUserEmail;
+                userEmail = GeneralUtilities.ConstantsUtil.defaultUserEmail;
             }
             Logger.log.Debug("    ===  Log in Desktop App with user name : " + userName + " & user email : " + userEmail);
 
-            WinWindow shareConnectWindow = new WinWindow();
-            shareConnectWindow.SearchProperties[WinWindow.PropertyNames.Name] = "ShareConnect";
-            shareConnectWindow.SearchProperties.Add(new PropertyExpression(WinWindow.PropertyNames.ClassName, "HwndWrapper", PropertyExpressionOperator.Contains));
-
-            WpfCustom bladeViewControlCustom = new WpfCustom(shareConnectWindow);
-            bladeViewControlCustom.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.MultiSessionBladeView";
-            bladeViewControlCustom.SearchProperties[WpfControl.PropertyNames.AutomationId] = "BladeViewControl";
+            WpfCustom bladeViewControlCustom = GeneralUtilities.ShareConnectControls.GetBladeViewControlCustom();
 
             WpfText userNameContainer = new WpfText(bladeViewControlCustom);
             userNameContainer.SearchProperties[WpfText.PropertyNames.AutomationId] = "FirstNameLabel";

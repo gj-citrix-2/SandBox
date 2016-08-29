@@ -17,7 +17,6 @@ namespace DesktopApp
         {
             GeneralUtilities.LoginConnectUtil.LaunchDA();
             GeneralUtilities.LoginConnectUtil.LoginDA();    // will use defaults if no arg provided.
-            // GeneralUtilities.LoginConnectUtil.LoginDA("gjwin7@grr.la"); 
             GeneralUtilities.LoginConnectUtil.LogoutDA();
             GeneralUtilities.LoginConnectUtil.CloseDA();
         }
@@ -30,24 +29,15 @@ namespace DesktopApp
             GeneralUtilities.LoginConnectUtil.CloseDA();
         }
 
-        public static void DA_Verify_User_Info()
+        public static void Host_Connect_Disconnect_Test()
         {
             GeneralUtilities.LoginConnectUtil.LaunchDA();
             GeneralUtilities.LoginConnectUtil.LoginDA();
-            GeneralUtilities.DesktopAppHomePageUtil.VerifyUserInfo("gjwin10 wang", "gjwin10@grr.la");
+            GeneralUtilities.LoginConnectUtil.CancelConnectHost();
+            GeneralUtilities.LoginConnectUtil.ConnectHost("Joker");
+            GeneralUtilities.LoginConnectUtil.DisconnectHost();
             GeneralUtilities.LoginConnectUtil.LogoutDA();
             GeneralUtilities.LoginConnectUtil.CloseDA();
-        }
-
-        public static void Host_Connect_Disconnect_Test()
-        {
-            //GeneralUtilities.LoginConnectUtil.LaunchDA();
-            //GeneralUtilities.LoginConnectUtil.LoginDA();
-            GeneralUtilities.LoginConnectUtil.CancelConnectHost();
-            //GeneralUtilities.LoginConnectUtil.ConnectHost();
-            //GeneralUtilities.LoginConnectUtil.DisconnectHost();
-            //GeneralUtilities.LoginConnectUtil.LogoutDA();
-            //GeneralUtilities.LoginConnectUtil.CloseDA();
         }
     }
 }

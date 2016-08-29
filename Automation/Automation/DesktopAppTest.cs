@@ -48,7 +48,7 @@ namespace DesktopApp
         [TestMethod]
         public void DesktopVerifyUserInfo()
         {
-            LoginBasic.DA_Verify_User_Info();
+            DesktopAppHomePageTest.DA_Verify_User_Info();
         }
 
         [TestMethod]
@@ -72,17 +72,8 @@ namespace DesktopApp
         {
             Logger.log.Info("=======================  Start SS_FastUserSwitch() =======================");
 
-            GeneralUtilities.LoginConnectUtil.ConnectHost();
+            FastUserSwitch.FusTest();
 
-            Mouse.Click();  // take me out when whole sequence is executed
-
-            for (int i = 0; i < 1; i++)
-            {
-                // Logger.log.Info("  === LOOP # " + i + "  ===");
-                FastUserSwitch.RunFUS(i);
-            }
-
-            GeneralUtilities.LoginConnectUtil.DisconnectHost();
             Logger.log.Info("=======================  End SS_FastUserSwitch() =======================");
         }
 
