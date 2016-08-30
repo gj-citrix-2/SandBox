@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace DesktopApp
 {
-    class FunctionButtonsBasic
+    class FunctionButtonsBasicTest
     {
         public static void Click_FileTransfer_Button()
         {
-            GeneralUtilities.FunctionalButtonsUtil.OpenFileTransfer();
-            GeneralUtilities.FunctionalButtonsUtil.CloseFileTransfer();
+            //GeneralUtilities.FunctionalButtonsUtil.OpenFileTransfer();
+            //GeneralUtilities.FunctionalButtonsUtil.CloseFileTransfer();
         }
 
         public static void Click_FullScreen_Button()

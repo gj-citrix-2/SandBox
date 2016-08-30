@@ -60,6 +60,7 @@
     <Compile Include="DesktopAppHomePageTest.cs" />
     <Compile Include="DesktopAppTest.cs" />
     <Compile Include="FastUserSwitchTest.cs" />
+    <Compile Include="FileTransferTest.cs" />
     <Compile Include="FunctionButtonsBasicTest.cs" />
     <Compile Include="LoginBasicTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -10,7 +10,7 @@ using System.Drawing;
 
 namespace DesktopApp
 {
-    class FastUserSwitch
+    class FastUserSwitchTest
     {
         private static string[] userNameAry = { "RDULGWOJIEHW02\\Tester", "RDULGWOJIEHW02\\Joker", "RDULGWOJIEHW02\\Joker", "RDULGWOJIEHW02\\Tester", "RDULGWOJIEHW02\\Tester" };
         private static string pwd = "Test1234";
@@ -74,9 +74,9 @@ namespace DesktopApp
             // wait for 20 seconds, should log back in again 
             Thread.Sleep(30000);
 
-            GeneralUtilities.FunctionalButtonsUtil.OpenFileTransfer();
+            GeneralUtilities.FileTransferUtil.OpenFileTransfer();
             Thread.Sleep(5000);
-            GeneralUtilities.FunctionalButtonsUtil.CloseFileTransfer();
+            GeneralUtilities.FileTransferUtil.CloseFileTransfer();
             Thread.Sleep(1000);
 
             Logger.log.Info("******  End RunFUS() ********");

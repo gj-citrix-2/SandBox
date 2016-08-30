@@ -34,7 +34,7 @@ namespace DesktopApp
         {
             Logger.log.Info("=======================  Start DesktopLoginLogout() =======================");
 
-            LoginBasic.DA_Login_Logout_Test();
+            LoginBasicTest.DA_Login_Logout_Test();
 
             Logger.log.Info("=======================  End DesktopLoginLogout() =======================");
         }
@@ -42,7 +42,7 @@ namespace DesktopApp
         [TestMethod]
         public void DesktopLoginError()
         {
-            LoginBasic.DA_Login_Error_Test();
+            LoginBasicTest.DA_Login_Error_Test();
         }
 
         [TestMethod]
@@ -54,17 +54,31 @@ namespace DesktopApp
         [TestMethod]
         public void HostConnectDisconnect()
         {
-            LoginBasic.Host_Connect_Disconnect_Test();
+            LoginBasicTest.Host_Connect_Disconnect_Test();
         }
 
         [TestMethod]
         public void SS_FunctionalButtons()
         {
-            Mouse.Click();  // take me out when whole sequence is executed
-            FunctionButtonsBasic.Click_FileTransfer_Button();
+            //Mouse.Click();  // take me out when whole sequence is executed
+            //FunctionButtonsBasicTest.Click_FileTransfer_Button();
 
-            FunctionButtonsBasic.Click_FullScreen_Button();
-            FunctionButtonsBasic.Click_ExitFullScreen_Button();
+            //FunctionButtonsBasicTest.Click_FullScreen_Button();
+            //FunctionButtonsBasicTest.Click_ExitFullScreen_Button();
+        }
+
+        [TestMethod]
+        public void FileTransferOpenClose()
+        {
+            Mouse.Click();  // take me out when whole sequence is executed
+            FileTransferTest.FileTransfer_Open_Close();
+        }
+
+        [TestMethod]
+        public void FileTransferUploadButton()
+        {
+            Mouse.Click();  // take me out when whole sequence is executed
+            FileTransferTest.FileTransfer_Verify_Upload();
         }
 
         [TestMethod]
@@ -72,7 +86,7 @@ namespace DesktopApp
         {
             Logger.log.Info("=======================  Start SS_FastUserSwitch() =======================");
 
-            FastUserSwitch.FusTest();
+            FastUserSwitchTest.FusTest();
 
             Logger.log.Info("=======================  End SS_FastUserSwitch() =======================");
         }

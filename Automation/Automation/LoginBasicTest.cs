@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DesktopApp
 {
-    class LoginBasic
+    class LoginBasicTest
     {
         public static void DA_Login_Logout_Test()
         {

@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConstantsUtil.cs" />
+    <Compile Include="FileTransferUtil.cs" />
     <Compile Include="FunctionalButtonsUtil.cs" />
     <Compile Include="LoginConnectUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
