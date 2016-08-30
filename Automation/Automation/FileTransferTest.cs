@@ -70,7 +70,7 @@ namespace DesktopApp
             Mouse.DoubleClick(itemCell, new Point(33, 20));
             Thread.Sleep(2000);
 
-            // 2nd level folder, **** need to clean the old controls and start new ones as following
+            // 2nd level folder, **** need to clean the old controls (the way CodedUI/SC do) and start new ones as following
             GeneralUtilities.ShareConnectControls.ClearFileTransferControls();
 
             WpfCustom folderListCustom2 = new WpfCustom(GeneralUtilities.ShareConnectControls.GetFileTransferWindow());

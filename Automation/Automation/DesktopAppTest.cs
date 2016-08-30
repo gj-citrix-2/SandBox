@@ -42,19 +42,31 @@ namespace DesktopApp
         [TestMethod]
         public void DesktopLoginError()
         {
+            Logger.log.Info("=======================  Start DA_Login_Error_Test() =======================");
+
             LoginBasicTest.DA_Login_Error_Test();
+
+            Logger.log.Info("=======================  End DA_Login_Error_Test() =======================");
         }
 
         [TestMethod]
         public void DesktopVerifyUserInfo()
         {
+            Logger.log.Info("=======================  Start DesktopVerifyUserInfo() =======================");
+
             DesktopAppHomePageTest.DA_Verify_User_Info();
+
+            Logger.log.Info("=======================  End DesktopVerifyUserInfo() =======================");
         }
 
         [TestMethod]
         public void HostConnectDisconnect()
         {
+            Logger.log.Info("=======================  Start HostConnectDisconnect() =======================");
+
             LoginBasicTest.Host_Connect_Disconnect_Test();
+
+            Logger.log.Info("=======================  End HostConnectDisconnect() =======================");
         }
 
         [TestMethod]
@@ -70,15 +82,23 @@ namespace DesktopApp
         [TestMethod]
         public void FileTransferOpenClose()
         {
+            Logger.log.Info("=======================  Start FileTransferOpenClose() =======================");
+
             Mouse.Click();  // take me out when whole sequence is executed
             FileTransferTest.FileTransfer_Open_Close();
+
+            Logger.log.Info("=======================  End FileTransferOpenClose() =======================");
         }
 
         [TestMethod]
         public void FileTransferUploadButton()
         {
+            Logger.log.Info("=======================  Start FileTransferUploadButton() =======================");
+
             Mouse.Click();  // take me out when whole sequence is executed
             FileTransferTest.FileTransfer_Verify_Upload();
+
+            Logger.log.Info("=======================  End FileTransferUploadButton() =======================");
         }
 
         [TestMethod]

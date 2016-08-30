@@ -32,9 +32,5 @@ namespace GeneralUtilities
             Mouse.Click(closeButton, new Point(19, 11));
             Thread.Sleep(1000);
         }
-
-        public static void VerifyUploadButton()
-        {
-        }
     }
 }
