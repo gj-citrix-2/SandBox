@@ -22,6 +22,11 @@ namespace GeneralUtilities
         private static HtmlEdit _credentialsPasswordEdit = null;
         private static HtmlDiv _applicationHostPane = null;
         private static HtmlButton _signInButton = null;
+        private static HtmlButton _loginwithmycompanycrButton = null;
+        private static HtmlSpan _loginwithmycompanycrPane = null;
+        private static HtmlButton _forgotPasswordButton = null;
+        private static HtmlHyperlink _privacyPolicyHyperlink = null;
+
 
         private static WpfCustom _bladeViewControlCustom = null;
         private static WpfImage _settings_buttonImage = null;
@@ -122,6 +127,66 @@ namespace GeneralUtilities
             }
             return _credentialsPasswordEdit;
         }
+
+        public static HtmlButton GetLoginwithmycompanycrButton()
+        {
+            if (_loginwithmycompanycrButton == null)
+            {
+                _loginwithmycompanycrButton = new HtmlButton(GetShareFileLoginDocument());
+                _loginwithmycompanycrButton.SearchProperties[HtmlButton.PropertyNames.Id] = "link-company-credentials";
+                _loginwithmycompanycrButton.SearchProperties[HtmlButton.PropertyNames.DisplayText] = "Log in with my company credentials ";
+                _loginwithmycompanycrButton.SearchProperties[HtmlButton.PropertyNames.Type] = "submit";
+                _loginwithmycompanycrButton.FilterProperties[HtmlButton.PropertyNames.Class] = "tertiary-action-link txt";
+                _loginwithmycompanycrButton.FilterProperties[HtmlButton.PropertyNames.ControlDefinition] = "tabindex=\"4\" class=\"tertiary-action-link";
+                _loginwithmycompanycrButton.FilterProperties[HtmlButton.PropertyNames.TagInstance] = "3";
+            }
+            return _loginwithmycompanycrButton;
+        }
+
+        public static HtmlSpan GetLoginwithmycompanycrPane()
+        {
+            if (_loginwithmycompanycrPane == null)
+            {
+                _loginwithmycompanycrPane = new HtmlSpan(GetLoginwithmycompanycrButton());
+                _loginwithmycompanycrPane.FilterProperties[HtmlDiv.PropertyNames.InnerText] = "Log in with my company credentials";
+                _loginwithmycompanycrPane.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "data-i18n=\"company_credentials\"";
+                _loginwithmycompanycrPane.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "4";
+            }
+            return _loginwithmycompanycrPane;
+        }
+
+        public static HtmlButton GetForgotPasswordButton()
+        {
+            if (_forgotPasswordButton == null)
+            {
+                _forgotPasswordButton = new HtmlButton(GetShareFileLoginDocument());
+                _forgotPasswordButton.SearchProperties[HtmlButton.PropertyNames.Id] = "link-forgot-password";
+                _forgotPasswordButton.SearchProperties[HtmlButton.PropertyNames.DisplayText] = "Forgot Password?";
+                _forgotPasswordButton.SearchProperties[HtmlButton.PropertyNames.Type] = "submit";
+                _forgotPasswordButton.FilterProperties[HtmlButton.PropertyNames.Class] = "tertiary-action-link txt";
+                _forgotPasswordButton.FilterProperties[HtmlButton.PropertyNames.ControlDefinition] = "tabindex=\"5\" class=\"tertiary-action-link";
+                _forgotPasswordButton.FilterProperties[HtmlButton.PropertyNames.TagInstance] = "4";
+            }
+            return _forgotPasswordButton;
+        }
+
+        public static HtmlHyperlink GetPrivacyPolicyHyperlink()
+        {
+            if (_privacyPolicyHyperlink == null)
+            {
+                _privacyPolicyHyperlink = new HtmlHyperlink(GetShareFileLoginDocument());
+                _privacyPolicyHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Id] = "link-privacy-policy";
+                _privacyPolicyHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.Target] = "_blank";
+                _privacyPolicyHyperlink.SearchProperties[HtmlHyperlink.PropertyNames.InnerText] = "Privacy Policy";
+                _privacyPolicyHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.AbsolutePath] = "/_Auth/PrivacyPolicy/en.html";
+                _privacyPolicyHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Href] = "https://secure.sharefiletest.com/_Auth/PrivacyPolicy/en.html";
+                _privacyPolicyHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.Class] = "tertiary-action-link";
+                _privacyPolicyHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.ControlDefinition] = "tabindex=\"6\" class=\"tertiary-action-link";
+                _privacyPolicyHyperlink.FilterProperties[HtmlHyperlink.PropertyNames.TagInstance] = "1";
+            }
+            return _privacyPolicyHyperlink;
+        }
+
 
         public static HtmlDiv GetApplicationHostPane()
         {

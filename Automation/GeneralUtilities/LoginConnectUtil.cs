@@ -120,6 +120,25 @@ namespace GeneralUtilities
             Logger.log.Info("******  End LoginDA_Faileure() ********");
         }
 
+
+        public static void LoginDA_CompanyCredential()
+        {
+            HtmlSpan loginButton = DesktopAppControls.GetLoginwithmycompanycrPane();
+            Mouse.Click(loginButton, new Point(118, 13));
+        }
+
+        public static void LoginDA_ForgotPassword()
+        {
+            HtmlButton forgotPwdButton = DesktopAppControls.GetForgotPasswordButton();
+            Mouse.Click(forgotPwdButton, new Point(35, 16));
+        }
+
+        public static void LoginDA_PrivacyPolicyHyperlink()
+        {
+            HtmlHyperlink privacyPolicyHyperlink = DesktopAppControls.GetPrivacyPolicyHyperlink();
+            Mouse.Click(privacyPolicyHyperlink, new Point(56, 12));
+        }
+
         public static void LogoutDA()
         {
             Logger.log.Info("******  Start LogoutDA() ********");
@@ -222,5 +241,19 @@ namespace GeneralUtilities
 
             Logger.log.Info("******  End DisconnectHost() ********");
         }
+
+        public static void LoginWithCompanyCredential()
+        {
+            Logger.log.Info("******  Start LoginWithCompanyCredential() ********");
+
+
+
+
+            Logger.log.Info("******  End LoginWithCompanyCredential() ********");
+        }
+
+
+
+
     }
 }

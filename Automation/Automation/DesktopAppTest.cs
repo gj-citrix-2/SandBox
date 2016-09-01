@@ -110,6 +110,37 @@ namespace DesktopApp
             Logger.log.Info("=======================  End SS_FastUserSwitch() =======================");
         }
 
+        [TestMethod]
+        public void DesktopLoginWithCompanyCredential()
+        {
+            Logger.log.Info("=======================  Start DesktopLoginWithCompanyCredential() =======================");
+
+            LoginBasicTest.DA_Login_Company_Credential_Test();
+
+            Logger.log.Info("=======================  End DesktopLoginWithCompanyCredential() =======================");
+        }
+
+        [TestMethod]
+        public void DesktopLoginPrivacyPolicy()
+        {
+            Logger.log.Info("=======================  Start DesktopLoginPrivacyPolicy() =======================");
+
+            LoginBasicTest.DA_Login_LoginDA_Privacy_Policy_Test();
+
+            Logger.log.Info("=======================  End DesktopLoginPrivacyPolicy() =======================");
+        }
+
+        [TestMethod]
+        public void DesktopLoginForgotPassword()
+        {
+            Logger.log.Info("=======================  Start DesktopLoginForgotPassword() =======================");
+
+            LoginBasicTest.DA_Login_Forgot_Password_Test();
+
+            Logger.log.Info("=======================  End DesktopLoginForgotPassword() =======================");
+        }
+
+
 
         #region Additional test attributes
 

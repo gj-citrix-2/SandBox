@@ -29,6 +29,26 @@ namespace DesktopApp
             GeneralUtilities.LoginConnectUtil.CloseDA();
         }
 
+        public static void DA_Login_Company_Credential_Test()
+        {
+            //GeneralUtilities.LoginConnectUtil.LaunchDA();
+            GeneralUtilities.LoginConnectUtil.LoginDA_CompanyCredential();    
+        }
+
+        public static void DA_Login_Forgot_Password_Test()
+        {
+            //GeneralUtilities.LoginConnectUtil.LaunchDA();
+            GeneralUtilities.LoginConnectUtil.LoginDA_ForgotPassword();
+        }
+
+        public static void DA_Login_LoginDA_Privacy_Policy_Test()
+        {
+            //GeneralUtilities.LoginConnectUtil.LaunchDA();
+            GeneralUtilities.LoginConnectUtil.LoginDA_PrivacyPolicyHyperlink();
+        }
+
+
+
         public static void Host_Connect_Disconnect_Test()
         {
             GeneralUtilities.LoginConnectUtil.LaunchDA();
