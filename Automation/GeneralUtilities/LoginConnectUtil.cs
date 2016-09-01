@@ -124,19 +124,19 @@ namespace GeneralUtilities
         public static void LoginDA_CompanyCredential()
         {
             HtmlSpan loginButton = DesktopAppControls.GetLoginwithmycompanycrPane();
-            Mouse.Click(loginButton, new Point(118, 13));
+            Mouse.Click(loginButton);
         }
 
         public static void LoginDA_ForgotPassword()
         {
             HtmlButton forgotPwdButton = DesktopAppControls.GetForgotPasswordButton();
-            Mouse.Click(forgotPwdButton, new Point(35, 16));
+            Mouse.Click(forgotPwdButton);
         }
 
         public static void LoginDA_PrivacyPolicyHyperlink()
         {
             HtmlHyperlink privacyPolicyHyperlink = DesktopAppControls.GetPrivacyPolicyHyperlink();
-            Mouse.Click(privacyPolicyHyperlink, new Point(56, 12));
+            Mouse.Click(privacyPolicyHyperlink);
         }
 
         public static void LogoutDA()
