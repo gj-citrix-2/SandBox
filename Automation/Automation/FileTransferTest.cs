@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UITesting;
+﻿using Microsoft.VisualStudio.TestTools.UITest.Input;
+using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.WinControls;
 using Microsoft.VisualStudio.TestTools.UITesting.WpfControls;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -36,24 +37,24 @@ namespace DesktopApp
             DisconnectFromHost();
         }
 
-        public static void FileTransfer_Verify_Upload()
+        public static void FileTransfer_Upload_Files()
         {
             ConnectToHost();
+
             GeneralUtilities.FileTransferUtil.OpenFileTransfer();
 
-            WpfCustom appBarCustom = GeneralUtilities.ShareConnectControls.GetFileTransferAppBarCustom();
-
+            WpfCustom appBarCustom = GeneralUtilities.FileTransferControls.GetAppBarCustom();
             Mouse.Click(appBarCustom, new Point(481, 28));
             Thread.Sleep(1000);
 
             // root folder that cannot have files uploaded
-            WpfButton okButton = new WpfButton(GeneralUtilities.ShareConnectControls.GetFileTransferWindow());
+            WpfButton okButton = new WpfButton(GeneralUtilities.FileTransferControls.GetFileTransferWindow());
             okButton.SearchProperties[WpfButton.PropertyNames.AutomationId] = "OkButton";
             Thread.Sleep(1000);
             Mouse.Click(okButton, new Point(30, 19));
 
             // move to other folders, 1st level folder
-            WpfCustom folderListCustom1 = new WpfCustom(GeneralUtilities.ShareConnectControls.GetFileTransferWindow());
+            WpfCustom folderListCustom1 = new WpfCustom(GeneralUtilities.FileTransferControls.GetFileTransferWindow());
             folderListCustom1.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.FolderListControl";
             folderListCustom1.SearchProperties[WpfControl.PropertyNames.AutomationId] = "FolderList";
 
@@ -67,13 +68,13 @@ namespace DesktopApp
             WpfCell itemCell = new WpfCell(itemDataItem1);
             itemCell.SearchProperties[WpfCell.PropertyNames.ColumnHeader] = "FILE NAME";
 
-            Mouse.DoubleClick(itemCell, new Point(33, 20));
+            Mouse.DoubleClick(itemCell, new Point(37, 18));
             Thread.Sleep(2000);
 
             // 2nd level folder, **** need to clean the old controls (the way CodedUI/SC do) and start new ones as following
-            GeneralUtilities.ShareConnectControls.ClearFileTransferControls();
+            GeneralUtilities.FileTransferControls.ClearFileTransferControls();
 
-            WpfCustom folderListCustom2 = new WpfCustom(GeneralUtilities.ShareConnectControls.GetFileTransferWindow());
+            WpfCustom folderListCustom2 = new WpfCustom(GeneralUtilities.FileTransferControls.GetFileTransferWindow());
             folderListCustom2.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.FolderListControl";
             folderListCustom2.SearchProperties[WpfControl.PropertyNames.AutomationId] = "FolderList";
 
@@ -82,41 +83,75 @@ namespace DesktopApp
 
             WpfControl itemDataItem2 = new WpfControl(fullListTable2);
             itemDataItem2.SearchProperties[WpfControl.PropertyNames.ControlType] = "DataItem";
-            itemDataItem2.SearchProperties[WpfControl.PropertyNames.Instance] = "3";
 
             WpfCell itemCell2 = new WpfCell(itemDataItem2);
             itemCell2.SearchProperties[WpfCell.PropertyNames.ColumnHeader] = "FILE NAME";
-
-            Mouse.DoubleClick(itemCell2, new Point(38, 13));
+   
+            Mouse.DoubleClick(itemCell2, new Point(59, 15));
             Thread.Sleep(2000);
 
             // click Upload button
-            appBarCustom = GeneralUtilities.ShareConnectControls.GetFileTransferAppBarCustom();
+            appBarCustom = GeneralUtilities.FileTransferControls.GetAppBarCustom();
             Mouse.Click(appBarCustom, new Point(481, 28));
             Thread.Sleep(1000);
 
             // make sure "Select File" window is up
-            WinWindow selectFilesWindow = GeneralUtilities.ShareConnectControls.GetSelectFileWindow();
+            WinWindow selectFilesWindow = GeneralUtilities.FileTransferControls.GetSelectFileWindow();
             Thread.Sleep(1000);
             Assert.IsTrue(selectFilesWindow.Exists, "Select File Window does not show up!");
 
-            WinButton cancelButton = GeneralUtilities.ShareConnectControls.GetSelectFileCancelButton();
-            Mouse.Click(cancelButton, new Point(53, 14));
-            Thread.Sleep(1000);
+            // Select a file
+            WinEdit nameEdit = GeneralUtilities.FileTransferControls.GetSelectFileNameEdit();
+            Mouse.Click(nameEdit, new Point(123, 15));
 
-            WpfButton homeButton = new WpfButton(GeneralUtilities.ShareConnectControls.GetFileTransferWindow());
+            // Open/load the file
+            WinButton openButton = GeneralUtilities.FileTransferControls.GetSelectFileOpenButton();
+            Mouse.Click(openButton, new Point(24, 9));
+            Thread.Sleep(3000);
+
+            // xxxx make sure the file is there, may use FT window move arounf directories then come back to verify it
+
+            WpfButton homeButton = new WpfButton(GeneralUtilities.FileTransferControls.GetFileTransferWindow());
             homeButton.SearchProperties[WpfButton.PropertyNames.Name] = "Home";
             Mouse.Click(homeButton, new Point(14, 9));
-
             Thread.Sleep(2000);
 
             GeneralUtilities.FileTransferUtil.CloseFileTransfer();
+            Thread.Sleep(1000);
+
+            // Clean up the files under the upload directory
+            // launch command window on host and run batch
+            Keyboard.SendKeys("R", System.Windows.Input.ModifierKeys.Windows);
+            Thread.Sleep(1000);
+            Keyboard.SendKeys("cmd");
+            Thread.Sleep(1000);
+            Keyboard.SendKeys("{ENTER}");
+            Thread.Sleep(1000);
+            Keyboard.SendKeys("cd C:\\ShareConnect");
+            Keyboard.SendKeys("{ENTER}");
+            Thread.Sleep(1000);
+            Keyboard.SendKeys("DeleteFiles.bat");
+            Keyboard.SendKeys("{ENTER}");
+            Thread.Sleep(1000);
+            Keyboard.SendKeys("exit");
+            Keyboard.SendKeys("{ENTER}");
+
             DisconnectFromHost();
         }
 
 
+        public static void FileTransfer_Download_files()
+        {
+            ConnectToHost();
+            GeneralUtilities.FileTransferUtil.OpenFileTransfer();
+
+
+
+            GeneralUtilities.FileTransferUtil.CloseFileTransfer();
+            Thread.Sleep(1000);
+
+            DisconnectFromHost();
+        }
 
     }
-
-
 }

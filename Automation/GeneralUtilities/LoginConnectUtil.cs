@@ -58,11 +58,11 @@ namespace GeneralUtilities
 
             Logger.log.Debug(" === LoginDA uses user email : " + userEmail.ToString());
 
-            HtmlEdit credentialsEmailEdit = ShareConnectControls.GetCredentialsEmailEdit();
+            HtmlEdit credentialsEmailEdit = DesktopAppControls.GetCredentialsEmailEdit();
 
-            HtmlEdit credentialsPasswordEdit = ShareConnectControls.GetCredentialsPasswordEdit();
+            HtmlEdit credentialsPasswordEdit = DesktopAppControls.GetCredentialsPasswordEdit();
 
-            HtmlButton signInButton = ShareConnectControls.GetSignInButton();
+            HtmlButton signInButton = DesktopAppControls.GetSignInButton();
 
 
             // Type 'abc@gmail.com' in 'credentials-email' text box
@@ -93,16 +93,16 @@ namespace GeneralUtilities
 
             Logger.log.Debug(" === LoginDA_Faileure uses user email : " + userEmail.ToString());
 
-            HtmlEdit credentialsEmailEdit = ShareConnectControls.GetCredentialsEmailEdit();
+            HtmlEdit credentialsEmailEdit = DesktopAppControls.GetCredentialsEmailEdit();
 
-            HtmlEdit credentialsPasswordEdit = ShareConnectControls.GetCredentialsPasswordEdit();
+            HtmlEdit credentialsPasswordEdit = DesktopAppControls.GetCredentialsPasswordEdit();
 
-            HtmlDiv usernameorPasswordwaPane = new HtmlDiv(ShareConnectControls.GetApplicationHostPane());
+            HtmlDiv usernameorPasswordwaPane = new HtmlDiv(DesktopAppControls.GetApplicationHostPane());
             usernameorPasswordwaPane.FilterProperties[HtmlDiv.PropertyNames.Class] = "error";
             usernameorPasswordwaPane.FilterProperties[HtmlDiv.PropertyNames.ControlDefinition] = "class=\"error\" data-bind=\"html: ErrorMessage\"";
             usernameorPasswordwaPane.FilterProperties[HtmlDiv.PropertyNames.TagInstance] = "22";
 
-            HtmlButton signInButton = ShareConnectControls.GetSignInButton();
+            HtmlButton signInButton = DesktopAppControls.GetSignInButton();
 
 
             // Type email in 'credentials-email' text box
@@ -124,18 +124,18 @@ namespace GeneralUtilities
         {
             Logger.log.Info("******  Start LogoutDA() ********");
 
-            WpfImage settings_buttonImage = ShareConnectControls.GetSettings_buttonImage();
+            WpfImage settings_buttonImage = DesktopAppControls.GetSettings_buttonImage();
 
             Mouse.Click(settings_buttonImage, new Point(6, 6));
             Thread.Sleep(3000);
 
-            WpfCustom aboutBladeCustom = ShareConnectControls.GetAboutBladeCustom();
+            WpfCustom aboutBladeCustom = DesktopAppControls.GetAboutBladeCustom();
 
             Mouse.Click(aboutBladeCustom, new Point(45, 330));
             Thread.Sleep(3000);
 
             // Click 'Yes' button
-            WpfButton yesButton = ShareConnectControls.GetConfirmSignOutYesButton();
+            WpfButton yesButton = DesktopAppControls.GetConfirmSignOutYesButton();
 
             Mouse.Click(yesButton, new Point(35, 21));
             Thread.Sleep(8000);
@@ -146,7 +146,7 @@ namespace GeneralUtilities
         public static void CloseDA()
         {
             // Click 'Close' button
-            WpfButton closeButton = ShareConnectControls.GetDesktopAppCloseButtonX();
+            WpfButton closeButton = DesktopAppControls.GetDesktopAppCloseButtonX();
 
             Mouse.Click(closeButton, new Point(35, 21));
         }
@@ -163,12 +163,13 @@ namespace GeneralUtilities
             {
                 hostPwd = ConstantsUtil.defaultHostPwd;
             }
-            Logger.log.Debug("    ===  Connect to Host uses user name : " + userName + "  === ");
+            Logger.log.Debug("    ===  Connect to Host with user name : " + userName + "  === ");
 
-            WpfCustom settingBladeCustom = ShareConnectControls.GetSettingBladeCustom();
+            WpfCustom settingBladeCustom = DesktopAppControls.GetSettingBladeCustom();
 
             Thread.Sleep(1000);
-            Mouse.Click(settingBladeCustom, new Point(44, 114));
+            Mouse.Click(settingBladeCustom, new Point(44, 114));  // win10
+//            Mouse.Click(settingBladeCustom, new Point(62, 157));   // win7
             Thread.Sleep(8000);
 
             Keyboard.SendKeys(userName);
@@ -191,7 +192,7 @@ namespace GeneralUtilities
 
             string userName = ConstantsUtil.defaultHostName;
 
-            WpfCustom settingBladeCustom = ShareConnectControls.GetSettingBladeCustom();
+            WpfCustom settingBladeCustom = DesktopAppControls.GetSettingBladeCustom();
 
             Thread.Sleep(1000);
             Mouse.Click(settingBladeCustom, new Point(44, 114));
@@ -215,7 +216,7 @@ namespace GeneralUtilities
         {
             Logger.log.Info("******  Start DisconnectHost() ********");
 
-            WpfCustom bladeViewControlCustom = ShareConnectControls.GetBladeViewControlCustom();
+            WpfCustom bladeViewControlCustom = DesktopAppControls.GetBladeViewControlCustom();
 
             Mouse.Click(bladeViewControlCustom, new Point(1869, 18));
 

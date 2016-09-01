@@ -27,7 +27,7 @@ namespace GeneralUtilities
 
         public static void CloseFileTransfer()
         {
-            WinButton closeButton = ShareConnectControls.GetFileTransferCloseButton();
+            WinButton closeButton = FileTransferControls.GetCloseButton();
 
             Mouse.Click(closeButton, new Point(19, 11));
             Thread.Sleep(1000);

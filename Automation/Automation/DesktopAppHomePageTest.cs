@@ -36,7 +36,7 @@ namespace DesktopApp
             }
             Logger.log.Debug("    ===  Log in Desktop App with user name : " + userName + " & user email : " + userEmail);
 
-            WpfCustom bladeViewControlCustom = GeneralUtilities.ShareConnectControls.GetBladeViewControlCustom();
+            WpfCustom bladeViewControlCustom = GeneralUtilities.DesktopAppControls.GetBladeViewControlCustom();
 
             WpfText userNameContainer = new WpfText(bladeViewControlCustom);
             userNameContainer.SearchProperties[WpfText.PropertyNames.AutomationId] = "FirstNameLabel";
@@ -59,6 +59,7 @@ namespace DesktopApp
             {
                 // Verify that the 'Name' property of user name is correct 
                 Assert.AreEqual(userName, userNameText.Name.ToString(), "!!! Wrong User Name Displayed !!!");
+                Logger.log.Info("    ===  Correct User Name displayed : " + userNameText.Name.ToString());
             }
             catch (AssertFailedException ex)
             {
@@ -69,6 +70,7 @@ namespace DesktopApp
             {
                 // Verify that the 'Name' property of user email is correct 
                 Assert.AreEqual(userEmail, userEmailText.Name.ToString(), "!!! Wrong Email Address Displayed !!!");
+                Logger.log.Info("    ===  Correct Email Address displayed : " + userEmailText.Name.ToString());
             }
             catch (AssertFailedException ex)
             {

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GeneralUtilities
 {
-    public class ShareConnectControls
+    public class DesktopAppControls
     {
         // Desktop App window
         private static WinWindow _shareConnectWindow = null;
@@ -30,15 +30,6 @@ namespace GeneralUtilities
         private static WpfButton _confirmSignOutYesButton = null;
 
         private static WpfButton _closeButton = null;
-
-        // Screen Sharing File Transfer window
-        private static WinWindow _fileTransferWindow = null;
-        private static WinButton _fileTransferCloseButton = null;
-        private static WpfPane _fileTransferContentFramePane = null;
-        private static WpfCustom _fileTransferContentAppBarCustom = null;
-        private static WinWindow _selectFileWindow = null;
-        private static WinWindow _selectFileCancelWindow = null;
-        private static WinButton _selectFileCancelButton = null;
 
 
         /*
@@ -225,97 +216,6 @@ namespace GeneralUtilities
             }
             return _confirmSignOutYesButton;
         }
-
-
-        /*
-         * 
-         *  File Transfer windows
-         *
-         */
-
-        public static WinWindow GetFileTransferWindow()
-        {
-            if (_fileTransferWindow == null)
-            {
-                _fileTransferWindow = new WinWindow();
-                _fileTransferWindow.SearchProperties[WinWindow.PropertyNames.Name] = "win10 aws - File Transfer";
-                _fileTransferWindow.SearchProperties.Add(new PropertyExpression(WinWindow.PropertyNames.ClassName, "HwndWrapper", PropertyExpressionOperator.Contains));
-
-            }
-            return _fileTransferWindow;
-        }
-
-        public static WinButton GetFileTransferCloseButton()
-        {
-            if (_fileTransferCloseButton == null)
-            {
-                _fileTransferCloseButton = new WinButton(GetFileTransferWindow());
-                _fileTransferCloseButton.SearchProperties[WinButton.PropertyNames.Name] = "Close";
-            }
-            return _fileTransferCloseButton;
-        }
-
-        public static WpfPane GetFileTransferContentFramePane()
-        {
-            if (_fileTransferContentFramePane == null)
-            {
-                _fileTransferContentFramePane = new WpfPane(GetFileTransferWindow());
-                _fileTransferContentFramePane.SearchProperties[WpfPane.PropertyNames.ClassName] = "Uia.Frame";
-                _fileTransferContentFramePane.SearchProperties[WpfPane.PropertyNames.AutomationId] = "ContentFrame";
-            }
-            return _fileTransferContentFramePane;
-        }
-
-        public static WpfCustom GetFileTransferAppBarCustom()
-        {
-            if (_fileTransferContentAppBarCustom == null)
-            {
-                _fileTransferContentAppBarCustom = new WpfCustom(GetFileTransferContentFramePane());
-                _fileTransferContentAppBarCustom.SearchProperties[WpfControl.PropertyNames.ClassName] = "Uia.AppBar";
-                _fileTransferContentAppBarCustom.SearchProperties[WpfControl.PropertyNames.AutomationId] = "AppBar";
-            }
-            return _fileTransferContentAppBarCustom;
-        }
-
-        public static void ClearFileTransferControls()
-        {
-            _fileTransferContentAppBarCustom = null;
-            _fileTransferContentFramePane = null;
-            _fileTransferCloseButton = null;
-            _fileTransferWindow = null;
-        }
-
-        public static WinWindow GetSelectFileWindow()
-        {
-            if (_selectFileWindow == null)
-            {
-                _selectFileWindow = new WinWindow();
-                _selectFileWindow.SearchProperties[WinWindow.PropertyNames.Name] = "Select Files";
-                _selectFileWindow.SearchProperties[WinWindow.PropertyNames.ClassName] = "#32770";
-            }
-            return _selectFileWindow;
-        }
-
-        public static WinWindow GetSelectFileCancelWindow()
-        {
-            if (_selectFileCancelWindow == null)
-            {
-                _selectFileCancelWindow = new WinWindow(GetSelectFileWindow());
-                _selectFileCancelWindow.SearchProperties[WinWindow.PropertyNames.ControlId] = "2";
-            }
-            return _selectFileCancelWindow;
-        }
-
-        public static WinButton GetSelectFileCancelButton()
-        {
-            if (_selectFileCancelButton == null)
-            {
-                _selectFileCancelButton = new WinButton(GetSelectFileCancelWindow());
-                _selectFileCancelButton.SearchProperties[WinButton.PropertyNames.Name] = "Cancel";
-            }
-            return _selectFileCancelButton;
-        }
-
 
     }
 }

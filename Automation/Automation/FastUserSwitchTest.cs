@@ -17,13 +17,15 @@ namespace DesktopApp
 
         public static void FusTest()
         {
-            GeneralUtilities.LoginConnectUtil.ConnectHost();
+            GeneralUtilities.LoginConnectUtil.ConnectHost("Tester");
 
             Mouse.Click();  // take me out when whole sequence is executed
 
-            for (int i = 0; i < 1; i++)
+            int loopCnt = 300;
+            Logger.log.Info("****!!!!  Running FUS test " + loopCnt + " times  !!!!****");
+
+            for (int i = 1; i <= loopCnt; i++)
             {
-                // Logger.log.Info("  === LOOP # " + i + "  ===");
                 RunFUS(i);
             }
 
@@ -37,14 +39,16 @@ namespace DesktopApp
             GeneralUtilities.FunctionalButtonsUtil.ClickCtrlAltDelButton();
 
             // click Switch User
-            // Mouse.Location = new Point(908, 560);  // sign out
-            Mouse.Location = new Point(908, 480);   // switch user
+            // Mouse.Location = new Point(908, 560);   // sing out,  win10
+            // Mouse.Location = new Point(938, 480);   // switch user,  win10
+            // Mouse.Location = new Point(968, 650);   // switch user, win7
             Thread.Sleep(1000);
-            Mouse.Click(new Point(908, 480));
+            Mouse.Click(new Point(938, 480));
 
-            Thread.Sleep(60000);
-            Mouse.Click();   // ??? need this
-            Thread.Sleep(3000);
+            Logger.log.Info("    ===  Start switching user, wait for 30 seconds  === ");
+            Thread.Sleep(30000);
+            Mouse.Click();   // need this for "Sign Out"
+            Thread.Sleep(1000);
 
             // logon notice
             Mouse.Location = new Point(700, 740);  
@@ -54,9 +58,9 @@ namespace DesktopApp
             // Login credentials
             int idx = loopCnt % userNameAry.Length;
             string uName = userNameAry[idx];
-            Logger.log.Info("    ===  Connect to Host uses user name : " + uName + "  === ");
+            Logger.log.Info("    ===  Connect to Host with user name : " + uName + "  === ");
 
-            Thread.Sleep(5000);
+            Thread.Sleep(3000);
             Keyboard.SendKeys(uName);
             Thread.Sleep(1000);
             Keyboard.SendKeys("{TAB}"); // jump to pwd
@@ -65,21 +69,22 @@ namespace DesktopApp
             Keyboard.SendKeys("{ENTER}");
             Thread.Sleep(3000);
 
-            //following is non-sense for this particulkar win10 laptop
+            //following is non-sense for this particular win10 laptop
             Keyboard.SendKeys("{TAB}");
             Keyboard.SendKeys("{TAB}");
             Thread.Sleep(1000);
             Keyboard.SendKeys("{ENTER}");
 
-            // wait for 20 seconds, should log back in again 
+            // wait for 30 seconds, should log back in again 
+            Logger.log.Info("    ===  Logged back in, wait for 30 seconds  === ");
             Thread.Sleep(30000);
 
-            GeneralUtilities.FileTransferUtil.OpenFileTransfer();
-            Thread.Sleep(5000);
-            GeneralUtilities.FileTransferUtil.CloseFileTransfer();
+            //GeneralUtilities.FileTransferUtil.OpenFileTransfer();
+            //Thread.Sleep(5000);
+            //GeneralUtilities.FileTransferUtil.CloseFileTransfer();
             Thread.Sleep(1000);
 
-            Logger.log.Info("******  End RunFUS() ********");
+            Logger.log.Info("******  End RunFUS()  with loopCnt = " + loopCnt + "  ********");
 
         }
     }

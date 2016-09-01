@@ -84,7 +84,6 @@ namespace DesktopApp
         {
             Logger.log.Info("=======================  Start FileTransferOpenClose() =======================");
 
-            Mouse.Click();  // take me out when whole sequence is executed
             FileTransferTest.FileTransfer_Open_Close();
 
             Logger.log.Info("=======================  End FileTransferOpenClose() =======================");
@@ -95,13 +94,13 @@ namespace DesktopApp
         {
             Logger.log.Info("=======================  Start FileTransferUploadButton() =======================");
 
-            Mouse.Click();  // take me out when whole sequence is executed
-            FileTransferTest.FileTransfer_Verify_Upload();
+            FileTransferTest.FileTransfer_Upload_Files();
 
             Logger.log.Info("=======================  End FileTransferUploadButton() =======================");
         }
 
         [TestMethod]
+        [Timeout(TestTimeout.Infinite)]
         public void SS_FastUserSwitch()
         {
             Logger.log.Info("=======================  Start SS_FastUserSwitch() =======================");
