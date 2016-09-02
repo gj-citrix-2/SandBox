@@ -242,18 +242,6 @@ namespace GeneralUtilities
             Logger.log.Info("******  End DisconnectHost() ********");
         }
 
-        public static void LoginWithCompanyCredential()
-        {
-            Logger.log.Info("******  Start LoginWithCompanyCredential() ********");
-
-
-
-
-            Logger.log.Info("******  End LoginWithCompanyCredential() ********");
-        }
-
-
-
 
     }
 }
