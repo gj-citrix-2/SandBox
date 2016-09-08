@@ -65,6 +65,7 @@ namespace DesktopApp
             Logger.log.Info("=======================  Start HostConnectDisconnect() =======================");
 
             LoginBasicTest.Host_Connect_Disconnect_Test();
+            //LoginBasicTest.Host_Connect_Use_Controls_Test();
 
             Logger.log.Info("=======================  End HostConnectDisconnect() =======================");
         }

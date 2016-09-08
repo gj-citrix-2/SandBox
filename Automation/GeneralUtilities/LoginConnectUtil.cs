@@ -205,6 +205,38 @@ namespace GeneralUtilities
             Logger.log.Info("******  End ConnectHost() ********");
         }
 
+        public static void ConnectHostWithControls(string userName = "", string hostPwd = "")
+        {
+            Logger.log.Info("******  Start ConnectHostWithControls() ********");
+
+            if (userName == "")
+            {
+                userName = ConstantsUtil.defaultHostName;
+            }
+            if (hostPwd == "")
+            {
+                hostPwd = ConstantsUtil.defaultHostPwd;
+            }
+            Logger.log.Debug("    ===  Connect to Host with user name : " + userName + "  === ");
+
+            WpfCustom settingBladeCustom = DesktopAppControls.GetSettingBladeCustom();
+
+            Thread.Sleep(1000);
+            Mouse.Click(settingBladeCustom, new Point(44, 114));  // win10
+                                                                  // Mouse.Click(settingBladeCustom, new Point(62, 157));   // win7
+            Thread.Sleep(8000);
+
+            WpfImage hamburgerImageImage = DesktopAppControls.GetHamburgerImageImage();
+            Mouse.Click(hamburgerImageImage);
+            Thread.Sleep(2000);
+
+            Mouse.Click(); // ??? need this
+            Thread.Sleep(1000);
+
+            Logger.log.Info("******  End ConnectHostWithControls() ********");
+        }
+
+
         public static void CancelConnectHost()
         {
             Logger.log.Info("******  Start CancelConnectHost() ********");

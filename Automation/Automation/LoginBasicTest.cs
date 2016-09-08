@@ -47,8 +47,7 @@ namespace DesktopApp
             GeneralUtilities.LoginConnectUtil.LoginDA_PrivacyPolicyHyperlink();
         }
 
-
-
+        
         public static void Host_Connect_Disconnect_Test()
         {
             GeneralUtilities.LoginConnectUtil.LaunchDA();
@@ -58,6 +57,17 @@ namespace DesktopApp
             GeneralUtilities.LoginConnectUtil.DisconnectHost();
             GeneralUtilities.LoginConnectUtil.LogoutDA();
             GeneralUtilities.LoginConnectUtil.CloseDA();
+        }
+
+        public static void Host_Connect_Use_Controls_Test()
+        {
+            //GeneralUtilities.LoginConnectUtil.LaunchDA();
+            //GeneralUtilities.LoginConnectUtil.LoginDA();
+            //GeneralUtilities.LoginConnectUtil.CancelConnectHost();
+            GeneralUtilities.LoginConnectUtil.ConnectHostWithControls("Joker");
+            GeneralUtilities.LoginConnectUtil.DisconnectHost();
+            //GeneralUtilities.LoginConnectUtil.LogoutDA();
+            //GeneralUtilities.LoginConnectUtil.CloseDA();
         }
     }
 }

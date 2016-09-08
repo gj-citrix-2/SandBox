@@ -21,7 +21,7 @@ namespace DesktopApp
 
             Mouse.Click();  // take me out when whole sequence is executed
 
-            int loopCnt = 300;
+            int loopCnt = 10;
             Logger.log.Info("****!!!!  Running FUS test " + loopCnt + " times  !!!!****");
 
             for (int i = 1; i <= loopCnt; i++)
@@ -36,6 +36,10 @@ namespace DesktopApp
         {
             Logger.log.Info("******  Start RunFUS() with loopCnt = " + loopCnt + "  ********");
 
+            bool isSwitching = false;
+            if (loopCnt % 2 == 0)
+                isSwitching = true;
+
             GeneralUtilities.FunctionalButtonsUtil.ClickCtrlAltDelButton();
 
             // click Switch User
@@ -43,10 +47,22 @@ namespace DesktopApp
             // Mouse.Location = new Point(938, 480);   // switch user,  win10
             // Mouse.Location = new Point(968, 650);   // switch user, win7
             Thread.Sleep(1000);
-            Mouse.Click(new Point(938, 480));
-
-            Logger.log.Info("    ===  Start switching user, wait for 30 seconds  === ");
-            Thread.Sleep(30000);
+            if (isSwitching)
+            {
+                Mouse.Click(new Point(938, 480));
+                Logger.log.Info("    ===  Start switching user, wait for 30 seconds  === ");
+                Thread.Sleep(30000);
+            }
+            else
+            {
+                Mouse.Click(new Point(908, 560));
+                Logger.log.Info("    ===  Start signing out, wait for 60 seconds  === ");
+                Thread.Sleep(5000);
+                Mouse.Location = new Point(650, 940);
+                Mouse.Click(new Point(650, 940));   // close applications
+                Thread.Sleep(30000);
+            }
+            
             Mouse.Click();   // need this for "Sign Out"
             Thread.Sleep(1000);
 
